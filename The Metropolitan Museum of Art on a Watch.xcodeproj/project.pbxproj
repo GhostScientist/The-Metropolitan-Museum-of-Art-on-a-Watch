@@ -12,6 +12,10 @@
 		D3DA10122BBB9307003ADB02 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DA10112BBB9307003ADB02 /* ContentView.swift */; };
 		D3DA10142BBB9308003ADB02 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3DA10132BBB9308003ADB02 /* Assets.xcassets */; };
 		D3DA10172BBB9308003ADB02 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3DA10162BBB9308003ADB02 /* Preview Assets.xcassets */; };
+		D3DA10242BBB9349003ADB02 /* TheMetMuseumAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DA10232BBB9349003ADB02 /* TheMetMuseumAPI.swift */; };
+		D3DA10262BBB9350003ADB02 /* Department.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DA10252BBB9350003ADB02 /* Department.swift */; };
+		D3DA10282BBB9355003ADB02 /* Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DA10272BBB9355003ADB02 /* Search.swift */; };
+		D3DA102A2BBB935B003ADB02 /* Objects.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DA10292BBB935B003ADB02 /* Objects.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +49,10 @@
 		D3DA10112BBB9307003ADB02 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		D3DA10132BBB9308003ADB02 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D3DA10162BBB9308003ADB02 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		D3DA10232BBB9349003ADB02 /* TheMetMuseumAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheMetMuseumAPI.swift; sourceTree = "<group>"; };
+		D3DA10252BBB9350003ADB02 /* Department.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Department.swift; sourceTree = "<group>"; };
+		D3DA10272BBB9355003ADB02 /* Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Search.swift; sourceTree = "<group>"; };
+		D3DA10292BBB935B003ADB02 /* Objects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Objects.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +86,8 @@
 		D3DA100E2BBB9307003ADB02 /* The Metropolitan Museum of Art on a Watch Watch App */ = {
 			isa = PBXGroup;
 			children = (
+				D3DA10222BBB9341003ADB02 /* API */,
+				D3DA10212BBB933E003ADB02 /* Types */,
 				D3DA100F2BBB9307003ADB02 /* The_Metropolitan_Museum_of_Art_on_a_WatchApp.swift */,
 				D3DA10112BBB9307003ADB02 /* ContentView.swift */,
 				D3DA10132BBB9308003ADB02 /* Assets.xcassets */,
@@ -92,6 +102,24 @@
 				D3DA10162BBB9308003ADB02 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		D3DA10212BBB933E003ADB02 /* Types */ = {
+			isa = PBXGroup;
+			children = (
+				D3DA10252BBB9350003ADB02 /* Department.swift */,
+				D3DA10272BBB9355003ADB02 /* Search.swift */,
+				D3DA10292BBB935B003ADB02 /* Objects.swift */,
+			);
+			path = Types;
+			sourceTree = "<group>";
+		};
+		D3DA10222BBB9341003ADB02 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				D3DA10232BBB9349003ADB02 /* TheMetMuseumAPI.swift */,
+			);
+			path = API;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -193,7 +221,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				D3DA10122BBB9307003ADB02 /* ContentView.swift in Sources */,
+				D3DA10242BBB9349003ADB02 /* TheMetMuseumAPI.swift in Sources */,
+				D3DA10282BBB9355003ADB02 /* Search.swift in Sources */,
 				D3DA10102BBB9307003ADB02 /* The_Metropolitan_Museum_of_Art_on_a_WatchApp.swift in Sources */,
+				D3DA102A2BBB935B003ADB02 /* Objects.swift in Sources */,
+				D3DA10262BBB9350003ADB02 /* Department.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -4,6 +4,7 @@ struct ContentView: View {
     @State private var departments: [Department] = []
     @State private var isLoading: Bool = false
     @State private var errorMessage: String?
+    @State private var selectedTab = 0
     
     private let metMuseumClient = MetMuseumClient()
     
@@ -15,18 +16,41 @@ struct ContentView: View {
                 } else if errorMessage != nil {
                     Text(errorMessage!)
                 } else {
-                    List(departments, id: \.departmentId) { department in
-                        NavigationLink(destination: DepartmentListView(departmentId: department.departmentId)) {
-                            Text(department.displayName)
+                    TabView(selection: $selectedTab) {
+                        ForEach(departments.indices, id: \.self) { index in
+                            let department = departments[index]
+                            NavigationLink(destination: DepartmentListView(departmentId: department.departmentId)) {
+                                Text(department.displayName as String)
+                                    .font(.title2)
+                                    .fontWeight(.bold)
+                                    .foregroundColor(.white)
+                                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
+                                    .padding()
+                                    .tag(index)
+                            }
+                            .containerBackground(.blue.gradient, for: .tabView)
+                            
                         }
+                        
+                        .buttonStyle(PlainButtonStyle())
                     }
-                    .navigationTitle("Departments")
+                    .tabViewStyle(.carousel)
+                    
                 }
             }
         }
         .onAppear {
             fetchDepartments()
         }
+    }
+    
+    private func getBackgroundColor(for tabIndex: Int) -> Color {
+        guard tabIndex >= 0 && tabIndex < departments.count else {
+            return Color.clear
+        }
+        
+        let colors: [Color] = [.red, .green, .blue, .yellow]
+        return colors[tabIndex % colors.count]
     }
     
     private func fetchDepartments() {

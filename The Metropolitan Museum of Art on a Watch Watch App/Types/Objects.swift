@@ -18,7 +18,7 @@ struct ObjectIDs: Codable {
 
 import Foundation
 
-struct ObjectDetails: Codable, Identifiable {
+struct ObjectDetails: Codable, Identifiable, Hashable {
     var id: Int{
         return objectID
     }

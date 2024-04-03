@@ -30,7 +30,7 @@ struct DepartmentListView: View {
                 Text("Loading")
             } else {
                 List(objects) { object in
-                    NavigationLink(destination: Text("\(object)")) {
+                    NavigationLink(destination: ObjectDetailView(objectDetails: object)) {
                         Text(object.title)
                     }
                 }

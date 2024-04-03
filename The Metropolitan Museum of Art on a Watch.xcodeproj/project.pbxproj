@@ -17,6 +17,7 @@
 		D3DA10262BBB9350003ADB02 /* Department.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DA10252BBB9350003ADB02 /* Department.swift */; };
 		D3DA10282BBB9355003ADB02 /* Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DA10272BBB9355003ADB02 /* Search.swift */; };
 		D3DA102A2BBB935B003ADB02 /* Objects.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DA10292BBB935B003ADB02 /* Objects.swift */; };
+		D3EDA7132BBCF62B00EA2B86 /* ObjectDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3EDA7122BBCF62B00EA2B86 /* ObjectDetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 		D3DA10252BBB9350003ADB02 /* Department.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Department.swift; sourceTree = "<group>"; };
 		D3DA10272BBB9355003ADB02 /* Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Search.swift; sourceTree = "<group>"; };
 		D3DA10292BBB935B003ADB02 /* Objects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Objects.swift; sourceTree = "<group>"; };
+		D3EDA7122BBCF62B00EA2B86 /* ObjectDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +97,7 @@
 				D3DA10132BBB9308003ADB02 /* Assets.xcassets */,
 				D3DA10152BBB9308003ADB02 /* Preview Content */,
 				D36DBEFC2BBCE8A400D7CD7D /* DepartmentListView.swift */,
+				D3EDA7122BBCF62B00EA2B86 /* ObjectDetailView.swift */,
 			);
 			path = "The Metropolitan Museum of Art on a Watch Watch App";
 			sourceTree = "<group>";
@@ -229,6 +232,7 @@
 				D3DA10102BBB9307003ADB02 /* The_Metropolitan_Museum_of_Art_on_a_WatchApp.swift in Sources */,
 				D36DBEFD2BBCE8A400D7CD7D /* DepartmentListView.swift in Sources */,
 				D3DA102A2BBB935B003ADB02 /* Objects.swift in Sources */,
+				D3EDA7132BBCF62B00EA2B86 /* ObjectDetailView.swift in Sources */,
 				D3DA10262BBB9350003ADB02 /* Department.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -384,7 +388,7 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 10.4;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
 			};
 			name = Debug;
 		};
@@ -415,7 +419,7 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				VALIDATE_PRODUCT = YES;
-				WATCHOS_DEPLOYMENT_TARGET = 10.4;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
 			};
 			name = Release;
 		};

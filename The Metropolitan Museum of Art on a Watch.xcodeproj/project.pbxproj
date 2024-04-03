@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D36DBEFD2BBCE8A400D7CD7D /* DepartmentListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36DBEFC2BBCE8A400D7CD7D /* DepartmentListView.swift */; };
 		D3DA100B2BBB9307003ADB02 /* The Metropolitan Museum of Art on a Watch Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = D3DA100A2BBB9307003ADB02 /* The Metropolitan Museum of Art on a Watch Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		D3DA10102BBB9307003ADB02 /* The_Metropolitan_Museum_of_Art_on_a_WatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DA100F2BBB9307003ADB02 /* The_Metropolitan_Museum_of_Art_on_a_WatchApp.swift */; };
 		D3DA10122BBB9307003ADB02 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DA10112BBB9307003ADB02 /* ContentView.swift */; };
@@ -43,6 +44,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		D36DBEFC2BBCE8A400D7CD7D /* DepartmentListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepartmentListView.swift; sourceTree = "<group>"; };
 		D3DA10042BBB9307003ADB02 /* The Metropolitan Museum of Art on a Watch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "The Metropolitan Museum of Art on a Watch.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3DA100A2BBB9307003ADB02 /* The Metropolitan Museum of Art on a Watch Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "The Metropolitan Museum of Art on a Watch Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3DA100F2BBB9307003ADB02 /* The_Metropolitan_Museum_of_Art_on_a_WatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = The_Metropolitan_Museum_of_Art_on_a_WatchApp.swift; sourceTree = "<group>"; };
@@ -92,6 +94,7 @@
 				D3DA10112BBB9307003ADB02 /* ContentView.swift */,
 				D3DA10132BBB9308003ADB02 /* Assets.xcassets */,
 				D3DA10152BBB9308003ADB02 /* Preview Content */,
+				D36DBEFC2BBCE8A400D7CD7D /* DepartmentListView.swift */,
 			);
 			path = "The Metropolitan Museum of Art on a Watch Watch App";
 			sourceTree = "<group>";
@@ -224,6 +227,7 @@
 				D3DA10242BBB9349003ADB02 /* TheMetMuseumAPI.swift in Sources */,
 				D3DA10282BBB9355003ADB02 /* Search.swift in Sources */,
 				D3DA10102BBB9307003ADB02 /* The_Metropolitan_Museum_of_Art_on_a_WatchApp.swift in Sources */,
+				D36DBEFD2BBCE8A400D7CD7D /* DepartmentListView.swift in Sources */,
 				D3DA102A2BBB935B003ADB02 /* Objects.swift in Sources */,
 				D3DA10262BBB9350003ADB02 /* Department.swift in Sources */,
 			);

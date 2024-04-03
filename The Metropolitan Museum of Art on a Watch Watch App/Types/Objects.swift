@@ -10,11 +10,19 @@ import Foundation
 struct ObjectIDs: Codable {
     let total: Int
     let objectIDs: [Int]
+    
+    var firstTen: [Int] {
+        return Array(objectIDs.prefix(10))
+    }
 }
 
 import Foundation
 
-struct ObjectDetails: Codable {
+struct ObjectDetails: Codable, Identifiable {
+    var id: Int{
+        return objectID
+    }
+    
     let objectID: Int
     let isHighlight: Bool
     let accessionYear: String

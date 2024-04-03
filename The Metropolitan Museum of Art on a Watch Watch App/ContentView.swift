@@ -16,7 +16,7 @@ struct ContentView: View {
                     Text(errorMessage!)
                 } else {
                     List(departments, id: \.departmentId) { department in
-                        NavigationLink(destination: Text(department.displayName)) {
+                        NavigationLink(destination: DepartmentListView(departmentId: department.departmentId)) {
                             Text(department.displayName)
                         }
                     }

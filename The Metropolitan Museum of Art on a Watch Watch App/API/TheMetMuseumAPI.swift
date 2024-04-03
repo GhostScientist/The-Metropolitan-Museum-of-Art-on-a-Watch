@@ -17,7 +17,9 @@ class MetMuseumClient {
     }
     
     func fetchObjects(departmentId: Int) async throws -> ObjectIDs {
-        let url = URL(string: "\(baseURL)/objects?departmentIds=\(departmentId)")!
+        print("FETCHING")
+        let url = URL(string: "https://collectionapi.metmuseum.org/public/collection/v1/objects?departmentIds=\(departmentId)")!
+        print(url)
         let (data, _) = try await URLSession.shared.data(from: url)
         return try JSONDecoder().decode(ObjectIDs.self, from: data)
     }

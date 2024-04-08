@@ -19,13 +19,18 @@ struct ContentView: View {
                     TabView(selection: $selectedTab) {
                         ForEach(departments.indices, id: \.self) { index in
                             let department = departments[index]
-                            NavigationLink(destination: DepartmentListView(departmentId: department.departmentId)) {
+                            NavigationLink(destination: DepartmentListView(department: department)) {
                                 Text(department.displayName as String)
                                     .font(.title2)
                                     .fontWeight(.bold)
                                     .foregroundColor(.white)
                                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
                                     .padding()
+                                    .background {
+                                            Image("\(department.departmentId)")
+                                                .resizable()
+                                                .scaledToFill()
+                                    }
                                     .tag(index)
                             }
                             .containerBackground(.blue.gradient, for: .tabView)

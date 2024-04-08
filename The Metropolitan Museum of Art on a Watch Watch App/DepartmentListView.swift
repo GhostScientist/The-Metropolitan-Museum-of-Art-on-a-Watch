@@ -22,7 +22,7 @@ struct DepartmentListView: View {
     
     private let metMuseumClient = MetMuseumClient()
     
-    var departmentId: Int
+    var department: Department
     
     var body: some View {
         Group {
@@ -34,9 +34,9 @@ struct DepartmentListView: View {
                         Text(object.title)
                     }
                 }
-                .navigationTitle("Departments")
+                .navigationTitle(department.displayName)
             }
-        }.onAppear {
+        }.onFirstAppear {
             fetchObjects()
         }
     }
@@ -47,7 +47,7 @@ struct DepartmentListView: View {
         
         Task {
             do {
-                let objectIDs = try await metMuseumClient.fetchObjects(departmentId: departmentId)
+                let objectIDs = try await metMuseumClient.fetchObjects(departmentId: department.departmentId)
                 let firstTenObjectIDs = objectIDs.firstTen
                 
                 objects = try await withThrowingTaskGroup(of: ObjectDetails.self) { group in
@@ -84,5 +84,32 @@ struct DepartmentListView: View {
 }
 
 #Preview {
-    DepartmentListView(departmentId: 3)
+    DepartmentListView(department: Department(departmentId: 1, displayName: "American Decorative Arts"))
+}
+
+
+
+public struct OnFirstAppearModifier: ViewModifier {
+
+    private let onFirstAppearAction: () -> ()
+    @State private var hasAppeared = false
+    
+    public init(_ onFirstAppearAction: @escaping () -> ()) {
+        self.onFirstAppearAction = onFirstAppearAction
+    }
+    
+    public func body(content: Content) -> some View {
+        content
+            .onAppear {
+                guard !hasAppeared else { return }
+                hasAppeared = true
+                onFirstAppearAction()
+            }
+    }
+}
+
+extension View {
+    func onFirstAppear(_ onFirstAppearAction: @escaping () -> () ) -> some View {
+        return modifier(OnFirstAppearModifier(onFirstAppearAction))
+    }
 }

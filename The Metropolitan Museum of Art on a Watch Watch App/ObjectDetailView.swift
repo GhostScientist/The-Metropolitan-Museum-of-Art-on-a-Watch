@@ -12,81 +12,153 @@ struct ObjectDetailView: View {
     let objectDetails: ObjectDetails
     
     var body: some View {
-        ScrollView {
-            VStack(alignment: .leading) {
-                if !objectDetails.primaryImage.isEmpty {
-                    NavigationLink(destination: ImageInspectView(imageURL: objectDetails.primaryImage)) {
-                        AsyncImage(url: URL(string: objectDetails.primaryImage)) { image in
-                            image
+        NavigationView {
+            ScrollView {
+                VStack(alignment: .leading) {
+                    if !objectDetails.primaryImage.isEmpty {
+                        NavigationLink(destination: ImageInspectView(imageURL: objectDetails.primaryImage)) {
+                            AsyncImage(url: URL(string: objectDetails.primaryImage)) { image in
+                                image
+                                
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                
+                            } placeholder: {
+                                ProgressView()
+                            }
+                            .cornerRadius(10.0)
+                        }.buttonStyle(PlainButtonStyle())
+                    } else {
+                        VStack {
+                            Image(systemName: "photo")
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
-                        } placeholder: {
-                            ProgressView()
+                                .frame(width: 50, height: 50)
+                                .foregroundColor(.gray)
+                            
+                            Text("No image for this option")
+                                .font(.caption)
+                                .foregroundColor(.gray)
                         }
                         .cornerRadius(10.0)
-                    }.buttonStyle(PlainButtonStyle())
-                }
-                
-                Text(objectDetails.title)
-                    .font(.title3)
-                    .fontWeight(.bold)
-                
-                
-                if !objectDetails.artistDisplayBio.isEmpty {
-                    Text(objectDetails.artistDisplayBio)
-                        .font(.subheadline)
-                        .foregroundColor(.secondary)
-                }
-                
-                Text(objectDetails.objectDate)
-                    .font(.subheadline)
-                
-                Text("Medium: \(objectDetails.medium)")
-                    .font(.subheadline)
-                
-                Text("Dimensions: \(objectDetails.dimensions)")
-                    .font(.subheadline)
-                
-                Text("Department: \(objectDetails.department)")
-                    .font(.subheadline)
-                
-                if !objectDetails.culture.isEmpty {
-                    Text("Culture: \(objectDetails.culture)")
-                        .font(.subheadline)
-                }
-                
-                if !objectDetails.period.isEmpty {
-                    Text("Period: \(objectDetails.period)")
-                        .font(.subheadline)
-                }
-                
-                if !objectDetails.geographyType.isEmpty {
-                    Text("\(objectDetails.geographyType): \(objectDetails.city), \(objectDetails.country)")
-                        .font(.subheadline)
-                }
-                
-                Text("Credit Line: \(objectDetails.creditLine)")
-                    .font(.subheadline)
-                    .foregroundColor(.secondary)
-                
-                if !objectDetails.objectURL.isEmpty {
-                    Button {
-                        guard let url = URL(string: objectDetails.objectURL) else { return }
-                        let session = ASWebAuthenticationSession(url: url, callbackURLScheme: "") { _,_ in
+                    }
+                    
+                    VStack(alignment: .leading) {
+                        Text(objectDetails.title)
+                            .font(.title3)
+                            .fontWeight(.bold)
+                        
+                        if !objectDetails.artistDisplayBio.isEmpty {
+                            Text(objectDetails.artistDisplayBio)
+                                .font(.subheadline)
+                                .foregroundColor(.secondary)
                         }
-                        session.prefersEphemeralWebBrowserSession = true
-                        session.start()
-                    } label: {
-                        Text("View on The Met website")
+                        
+                        Divider()
+                        
+                        VStack(alignment: .leading) {
+                            Text("Date:")
+                                .fontWeight(.bold)
+                            Text(objectDetails.objectDate)
+                                .foregroundColor(.secondary)
+                        }
+                        .font(.subheadline)
+                        
+                        Divider()
+                        
+                        VStack(alignment: .leading) {
+                            Text("Medium:")
+                                .fontWeight(.bold)
+                            Text(objectDetails.medium)
+                                .foregroundColor(.secondary)
+                        }
+                        .font(.subheadline)
+                        
+                        Divider()
+                        
+                        VStack(alignment: .leading) {
+                            Text("Dimensions:")
+                                .fontWeight(.bold)
+                            Text(objectDetails.dimensions)
+                                .foregroundColor(.secondary)
+                        }
+                        .font(.subheadline)
+                        
+                        Divider()
+                        
+                        VStack(alignment: .leading) {
+                            Text("Department:")
+                                .fontWeight(.bold)
+                            Text(objectDetails.department)
+                                .foregroundColor(.secondary)
+                        }
+                        .font(.subheadline)
+                        
+                        if !objectDetails.culture.isEmpty {
+                            Divider()
+                            
+                            VStack(alignment: .leading) {
+                                Text("Culture:")
+                                    .fontWeight(.bold)
+                                Text(objectDetails.culture)
+                                    .foregroundColor(.secondary)
+                            }
                             .font(.subheadline)
-                            .foregroundColor(.orange)
-                    }.buttonBorderShape(.roundedRectangle(radius: 10))
+                        }
+                        
+                        if !objectDetails.period.isEmpty {
+                            Divider()
+                            
+                            VStack(alignment: .leading) {
+                                Text("Period:")
+                                    .fontWeight(.bold)
+                                Text(objectDetails.period)
+                                    .foregroundColor(.secondary)
+                            }
+                            .font(.subheadline)
+                        }
+                        
+                        if !objectDetails.geographyType.isEmpty {
+                            Divider()
+                            
+                            VStack(alignment: .leading) {
+                                Text("\(objectDetails.geographyType):")
+                                    .fontWeight(.bold)
+                                Text("\(objectDetails.city), \(objectDetails.country)")
+                                    .foregroundColor(.secondary)
+                            }
+                            .font(.subheadline)
+                        }
+                        
+                        Divider()
+                        
+                        VStack(alignment: .leading) {
+                            Text("Credit Line:")
+                                .fontWeight(.bold)
+                            Text(objectDetails.creditLine)
+                                .foregroundColor(.secondary)
+                        }
+                        .font(.subheadline)
+                        
+                        if !objectDetails.objectURL.isEmpty {
+                            Button {
+                                guard let url = URL(string: objectDetails.objectURL) else { return }
+                                let session = ASWebAuthenticationSession(url: url, callbackURLScheme: "") { _,_ in
+                                }
+                                session.prefersEphemeralWebBrowserSession = true
+                                session.start()
+                            } label: {
+                                Text("View More Details")
+                                
+                            }
+                        }
+                        
+                    }
                 }
-                
-                
+                .padding()
             }
-            .padding()
         }
+        
         .containerBackground(.blue.gradient, for: .navigation)
         .navigationBarTitle(objectDetails.artistDisplayName)
     }
@@ -107,12 +179,12 @@ struct ImageInspectView: View {
                     .scaleEffect(scale)
                     .offset(offset)
                     .onTapGesture(count: 2) {
-                            print("Double tapped!")
+                        print("Double tapped!")
                         withAnimation(.spring()) {
                             scale = 1.0
                             offset = .zero
                         }
-                        }
+                    }
                     .gesture(
                         DragGesture()
                             .onChanged { value in

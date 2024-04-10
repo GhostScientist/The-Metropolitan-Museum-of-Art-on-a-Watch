@@ -48,7 +48,7 @@ struct DepartmentListView: View {
         Task {
             do {
                 let objectIDs = try await metMuseumClient.fetchObjects(departmentId: department.departmentId)
-                let firstTenObjectIDs = objectIDs.firstTen
+                let firstTenObjectIDs = objectIDs.allAsInt
                 
                 objects = try await withThrowingTaskGroup(of: ObjectDetails.self) { group in
                     for objectID in firstTenObjectIDs {

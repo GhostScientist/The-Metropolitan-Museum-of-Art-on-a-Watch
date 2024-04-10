@@ -9,7 +9,7 @@ struct ContentView: View {
     private let metMuseumClient = MetMuseumClient()
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             Group {
                 if isLoading {
                     ProgressView("Loading")
@@ -33,7 +33,7 @@ struct ContentView: View {
                                     }
                                     .tag(index)
                             }
-                            .containerBackground(.blue.gradient, for: .tabView)
+                            .containerBackground(.green.gradient, for: .tabView)
                             
                         }
                         

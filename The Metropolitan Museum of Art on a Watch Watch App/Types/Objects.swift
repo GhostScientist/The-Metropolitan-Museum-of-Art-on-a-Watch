@@ -14,6 +14,10 @@ struct ObjectIDs: Codable {
     var firstTen: [Int] {
         return Array(objectIDs.prefix(10))
     }
+    
+    var allAsInt: [Int] {
+        return Array(objectIDs)
+    }
 }
 
 import Foundation

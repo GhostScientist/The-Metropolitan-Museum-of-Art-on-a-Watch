@@ -26,14 +26,13 @@ struct ContentView: View {
                                     .foregroundColor(.white)
                                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
                                     .padding()
-                                    .background {
-                                            Image("\(department.departmentId)")
-                                                .resizable()
-                                                .scaledToFill()
-                                    }
                                     .tag(index)
                             }
-                            .containerBackground(.green.gradient, for: .tabView)
+                            .containerBackground(for: .tabView) {
+                                Image("\(department.departmentId)")
+                                    .resizable()
+                                    .scaledToFill()
+                            }
                             
                         }
                         

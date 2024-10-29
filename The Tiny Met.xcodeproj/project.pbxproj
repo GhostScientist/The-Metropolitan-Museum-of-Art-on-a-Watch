@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		D36DBEFD2BBCE8A400D7CD7D /* DepartmentListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36DBEFC2BBCE8A400D7CD7D /* DepartmentListView.swift */; };
-		D3DA100B2BBB9307003ADB02 /* The Metropolitan Museum of Art on a Watch Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = D3DA100A2BBB9307003ADB02 /* The Metropolitan Museum of Art on a Watch Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		D3DA100B2BBB9307003ADB02 /* The Tiny Met Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = D3DA100A2BBB9307003ADB02 /* The Tiny Met Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		D3DA10102BBB9307003ADB02 /* The_Metropolitan_Museum_of_Art_on_a_WatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DA100F2BBB9307003ADB02 /* The_Metropolitan_Museum_of_Art_on_a_WatchApp.swift */; };
 		D3DA10122BBB9307003ADB02 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DA10112BBB9307003ADB02 /* ContentView.swift */; };
 		D3DA10142BBB9308003ADB02 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3DA10132BBB9308003ADB02 /* Assets.xcassets */; };
@@ -37,7 +37,7 @@
 			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
 			dstSubfolderSpec = 16;
 			files = (
-				D3DA100B2BBB9307003ADB02 /* The Metropolitan Museum of Art on a Watch Watch App.app in Embed Watch Content */,
+				D3DA100B2BBB9307003ADB02 /* The Tiny Met Watch App.app in Embed Watch Content */,
 			);
 			name = "Embed Watch Content";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -46,8 +46,8 @@
 
 /* Begin PBXFileReference section */
 		D36DBEFC2BBCE8A400D7CD7D /* DepartmentListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepartmentListView.swift; sourceTree = "<group>"; };
-		D3DA10042BBB9307003ADB02 /* The Metropolitan Museum of Art on a Watch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "The Metropolitan Museum of Art on a Watch.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		D3DA100A2BBB9307003ADB02 /* The Metropolitan Museum of Art on a Watch Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "The Metropolitan Museum of Art on a Watch Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D3DA10042BBB9307003ADB02 /* The Tiny Met.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "The Tiny Met.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D3DA100A2BBB9307003ADB02 /* The Tiny Met Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "The Tiny Met Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3DA100F2BBB9307003ADB02 /* The_Metropolitan_Museum_of_Art_on_a_WatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = The_Metropolitan_Museum_of_Art_on_a_WatchApp.swift; sourceTree = "<group>"; };
 		D3DA10112BBB9307003ADB02 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		D3DA10132BBB9308003ADB02 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -81,8 +81,8 @@
 		D3DA10052BBB9307003ADB02 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D3DA10042BBB9307003ADB02 /* The Metropolitan Museum of Art on a Watch.app */,
-				D3DA100A2BBB9307003ADB02 /* The Metropolitan Museum of Art on a Watch Watch App.app */,
+				D3DA10042BBB9307003ADB02 /* The Tiny Met.app */,
+				D3DA100A2BBB9307003ADB02 /* The Tiny Met Watch App.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -131,9 +131,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		D3DA10032BBB9307003ADB02 /* The Metropolitan Museum of Art on a Watch */ = {
+		D3DA10032BBB9307003ADB02 /* The Tiny Met */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D3DA101E2BBB9308003ADB02 /* Build configuration list for PBXNativeTarget "The Metropolitan Museum of Art on a Watch" */;
+			buildConfigurationList = D3DA101E2BBB9308003ADB02 /* Build configuration list for PBXNativeTarget "The Tiny Met" */;
 			buildPhases = (
 				D3DA10022BBB9307003ADB02 /* Resources */,
 				D3DA101D2BBB9308003ADB02 /* Embed Watch Content */,
@@ -143,14 +143,14 @@
 			dependencies = (
 				D3DA100D2BBB9307003ADB02 /* PBXTargetDependency */,
 			);
-			name = "The Metropolitan Museum of Art on a Watch";
+			name = "The Tiny Met";
 			productName = "The Metropolitan Museum of Art on a Watch";
-			productReference = D3DA10042BBB9307003ADB02 /* The Metropolitan Museum of Art on a Watch.app */;
+			productReference = D3DA10042BBB9307003ADB02 /* The Tiny Met.app */;
 			productType = "com.apple.product-type.application.watchapp2-container";
 		};
-		D3DA10092BBB9307003ADB02 /* The Metropolitan Museum of Art on a Watch Watch App */ = {
+		D3DA10092BBB9307003ADB02 /* The Tiny Met Watch App */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D3DA101A2BBB9308003ADB02 /* Build configuration list for PBXNativeTarget "The Metropolitan Museum of Art on a Watch Watch App" */;
+			buildConfigurationList = D3DA101A2BBB9308003ADB02 /* Build configuration list for PBXNativeTarget "The Tiny Met Watch App" */;
 			buildPhases = (
 				D3DA10062BBB9307003ADB02 /* Sources */,
 				D3DA10072BBB9307003ADB02 /* Frameworks */,
@@ -160,9 +160,9 @@
 			);
 			dependencies = (
 			);
-			name = "The Metropolitan Museum of Art on a Watch Watch App";
+			name = "The Tiny Met Watch App";
 			productName = "The Metropolitan Museum of Art on a Watch Watch App";
-			productReference = D3DA100A2BBB9307003ADB02 /* The Metropolitan Museum of Art on a Watch Watch App.app */;
+			productReference = D3DA100A2BBB9307003ADB02 /* The Tiny Met Watch App.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -183,7 +183,7 @@
 					};
 				};
 			};
-			buildConfigurationList = D3DA10012BBB9307003ADB02 /* Build configuration list for PBXProject "The Metropolitan Museum of Art on a Watch" */;
+			buildConfigurationList = D3DA10012BBB9307003ADB02 /* Build configuration list for PBXProject "The Tiny Met" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -196,8 +196,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D3DA10032BBB9307003ADB02 /* The Metropolitan Museum of Art on a Watch */,
-				D3DA10092BBB9307003ADB02 /* The Metropolitan Museum of Art on a Watch Watch App */,
+				D3DA10032BBB9307003ADB02 /* The Tiny Met */,
+				D3DA10092BBB9307003ADB02 /* The Tiny Met Watch App */,
 			);
 		};
 /* End PBXProject section */
@@ -242,7 +242,7 @@
 /* Begin PBXTargetDependency section */
 		D3DA100D2BBB9307003ADB02 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = D3DA10092BBB9307003ADB02 /* The Metropolitan Museum of Art on a Watch Watch App */;
+			target = D3DA10092BBB9307003ADB02 /* The Tiny Met Watch App */;
 			targetProxy = D3DA100C2BBB9307003ADB02 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -373,7 +373,7 @@
 				DEVELOPMENT_TEAM = ZU78LZES28;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = "The Metropolitan Museum of Art on a Watch";
+				INFOPLIST_KEY_CFBundleDisplayName = "The Tiny Met";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKWatchOnly = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -403,7 +403,7 @@
 				DEVELOPMENT_TEAM = ZU78LZES28;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = "The Metropolitan Museum of Art on a Watch";
+				INFOPLIST_KEY_CFBundleDisplayName = "The Tiny Met";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKWatchOnly = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -459,7 +459,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		D3DA10012BBB9307003ADB02 /* Build configuration list for PBXProject "The Metropolitan Museum of Art on a Watch" */ = {
+		D3DA10012BBB9307003ADB02 /* Build configuration list for PBXProject "The Tiny Met" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D3DA10182BBB9308003ADB02 /* Debug */,
@@ -468,7 +468,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D3DA101A2BBB9308003ADB02 /* Build configuration list for PBXNativeTarget "The Metropolitan Museum of Art on a Watch Watch App" */ = {
+		D3DA101A2BBB9308003ADB02 /* Build configuration list for PBXNativeTarget "The Tiny Met Watch App" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D3DA101B2BBB9308003ADB02 /* Debug */,
@@ -477,7 +477,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D3DA101E2BBB9308003ADB02 /* Build configuration list for PBXNativeTarget "The Metropolitan Museum of Art on a Watch" */ = {
+		D3DA101E2BBB9308003ADB02 /* Build configuration list for PBXNativeTarget "The Tiny Met" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D3DA101F2BBB9308003ADB02 /* Debug */,

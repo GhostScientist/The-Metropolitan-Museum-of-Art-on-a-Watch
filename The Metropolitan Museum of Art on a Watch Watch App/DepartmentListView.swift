@@ -19,6 +19,8 @@ struct DepartmentListView: View {
     @State private var objects: [ObjectDetails] = []
     @State private var isLoading: Bool = false
     @State private var errorMessage: String?
+    @State private var searchText = ""
+    @State private var isSearching = false
     
     private let metMuseumClient = MetMuseumClient()
     
@@ -28,6 +30,8 @@ struct DepartmentListView: View {
         Group {
             if isLoading {
                 Text("Loading")
+            } else if isSearching && objects.isEmpty {
+                Text("No results found")
             } else {
                 List(objects) { object in
                     NavigationLink(destination: ObjectDetailView(objectDetails: object)) {
@@ -36,8 +40,53 @@ struct DepartmentListView: View {
                 }
                 .navigationTitle(department.displayName)
             }
-        }.onFirstAppear {
+        }
+        .onFirstAppear {
             fetchObjects()
+        }
+        .searchable(text: $searchText, prompt: "Search objects")
+        .onSubmit(of: .search) {
+            print("Searching")
+            searchObjects()
+        }
+        
+    }
+    
+    private func searchObjects() {
+        guard !searchText.isEmpty else {
+            fetchObjects()
+            return
+        }
+        
+        isLoading = true
+        isSearching = true
+        errorMessage = nil
+        
+        Task {
+            do {
+                let searchResult = try await metMuseumClient.searchDepartmentForObjectsBySearchTerm(searchTerm: searchText, departmentId: department.departmentId)
+                let firstTenObjectIDs = searchResult.objectIDs.prefix(10)
+                
+                objects = try await withThrowingTaskGroup(of: ObjectDetails.self) { group in
+                    for objectID in firstTenObjectIDs {
+                        print(objectID)
+                        group.addTask {
+                            try await metMuseumClient.fetchObjectDetails(objectID: objectID)
+                        }
+                    }
+                    
+                    var fetchedObjects: [ObjectDetails] = []
+                    for try await object in group {
+                        fetchedObjects.append(object)
+                    }
+                    return fetchedObjects
+                }
+                
+                isLoading = false
+            } catch {
+                errorMessage = "Failed to search objects"
+                isLoading = false
+            }
         }
     }
     
@@ -48,7 +97,7 @@ struct DepartmentListView: View {
         Task {
             do {
                 let objectIDs = try await metMuseumClient.fetchObjects(departmentId: department.departmentId)
-                let firstTenObjectIDs = objectIDs.allAsInt
+                let firstTenObjectIDs = objectIDs.firstTen
                 
                 objects = try await withThrowingTaskGroup(of: ObjectDetails.self) { group in
                     for objectID in firstTenObjectIDs {

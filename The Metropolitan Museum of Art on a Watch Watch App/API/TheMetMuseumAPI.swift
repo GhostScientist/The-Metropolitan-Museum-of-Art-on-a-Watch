@@ -16,6 +16,12 @@ class MetMuseumClient {
         return try JSONDecoder().decode(DepartmentResponse.self, from: data)
     }
     
+    func searchDepartmentForObjectsBySearchTerm(searchTerm: String, departmentId: Int) async throws -> SearchResult {
+        let url = URL(string: "https://collectionapi.metmuseum.org/public/collection/v1/search?departmentId=\(departmentId)&q=\(searchTerm)")!
+        let (data, _) = try await URLSession.shared.data(from: url)
+        return try JSONDecoder().decode(SearchResult.self, from: data)
+    }
+    
     func fetchObjects(departmentId: Int) async throws -> ObjectIDs {
         print("FETCHING")
         let url = URL(string: "https://collectionapi.metmuseum.org/public/collection/v1/objects?departmentIds=\(departmentId)")!

@@ -14,7 +14,7 @@ struct ObjectDetailView: View {
     var body: some View {
         NavigationView {
             ScrollView {
-                VStack(alignment: .leading) {
+                VStack(alignment: .center) {
                     if !objectDetails.primaryImage.isEmpty {
                         NavigationLink(destination: ImageInspectView(imageURL: objectDetails.primaryImage)) {
                             AsyncImage(url: URL(string: objectDetails.primaryImage)) { image in
@@ -29,18 +29,17 @@ struct ObjectDetailView: View {
                             .cornerRadius(10.0)
                         }.buttonStyle(PlainButtonStyle())
                     } else {
-                        VStack {
-                            Image(systemName: "photo")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 50, height: 50)
-                                .foregroundColor(.gray)
-                            
-                            Text("No image for this option")
-                                .font(.caption)
-                                .foregroundColor(.gray)
-                        }
-                        .cornerRadius(10.0)
+                            VStack {
+                                Image(systemName: "photo")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 50, height: 50)
+                                    .foregroundColor(.gray)
+                                
+                                Text("No image for this option")
+                                    .font(.caption)
+                                    .foregroundColor(.gray)
+                            }.padding()
                     }
                     
                     VStack(alignment: .leading) {
@@ -93,17 +92,24 @@ struct ObjectDetailView: View {
                         ObjectInfoSection(title: "Credit Line", content: objectDetails.creditLine)
                         
                         if !objectDetails.objectURL.isEmpty {
-                            Button {
-                                guard let url = URL(string: objectDetails.objectURL) else { return }
-                                let session = ASWebAuthenticationSession(url: url, callbackURLScheme: "") { _,_ in
+                            VStack {
+                                Button {
+                                    guard let url = URL(string: objectDetails.objectURL) else { return }
+                                    let session = ASWebAuthenticationSession(url: url, callbackURLScheme: "") { _,_ in
+                                    }
+                                    session.prefersEphemeralWebBrowserSession = true
+                                    session.start()
+                                } label: {
+                                    Text("View More Details")
                                 }
-                                session.prefersEphemeralWebBrowserSession = true
-                                session.start()
-                            } label: {
-                                Text("View More Details")
-                                
+                                ShareLink(items: [URL(string: objectDetails.objectURL)!]) {
+                                    Label("Share", systemImage: "paperplane.fill")
+                                }
                             }
+                            
                         }
+                        
+                        
                         
                     }
                 }

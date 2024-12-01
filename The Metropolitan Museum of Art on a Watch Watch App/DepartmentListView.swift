@@ -1,6 +1,6 @@
 //
 //  DepartmentListView.swift
-//  The Metropolitan Museum of Art on a Watch Watch App
+//  The Tiny Met Watch App
 //
 //  Created by Dakota Kim on 4/2/24.
 //

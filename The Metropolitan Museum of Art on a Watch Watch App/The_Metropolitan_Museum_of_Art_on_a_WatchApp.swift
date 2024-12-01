@@ -1,6 +1,6 @@
 //
 //  The_Metropolitan_Museum_of_Art_on_a_WatchApp.swift
-//  The Metropolitan Museum of Art on a Watch Watch App
+//  The Tiny Met Watch App
 //
 //  Created by Dakota Kim on 4/1/24.
 //

@@ -3,30 +3,32 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D347A15E2CD0869100977486 /* OnFirstAppearModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D347A15D2CD0869100977486 /* OnFirstAppearModifier.swift */; };
-		D347A1602CD086F400977486 /* CachedObjectDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = D347A15F2CD086F400977486 /* CachedObjectDetails.swift */; };
-		D347A1622CD0871000977486 /* Object.swift in Sources */ = {isa = PBXBuildFile; fileRef = D347A1612CD0871000977486 /* Object.swift */; };
+		D31E00F22D3F1FAC00E84687 /* RealityKitContent in Frameworks */ = {isa = PBXBuildFile; productRef = D31E00F12D3F1FAC00E84687 /* RealityKitContent */; };
+		D329878B2D3F21E80036756A /* TheMetUtilities in Frameworks */ = {isa = PBXBuildFile; productRef = D329878A2D3F21E80036756A /* TheMetUtilities */; };
+		D32987A02D3F27180036756A /* TheMetUtilities in Frameworks */ = {isa = PBXBuildFile; productRef = D329879F2D3F27180036756A /* TheMetUtilities */; };
 		D347A1642CD0875200977486 /* ImageInspectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D347A1632CD0875200977486 /* ImageInspectView.swift */; };
 		D347A1662CD0877500977486 /* ObjectInfoSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D347A1652CD0877500977486 /* ObjectInfoSection.swift */; };
-		D347A1682CD0886E00977486 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D347A1672CD0886E00977486 /* NetworkError.swift */; };
 		D36DBEFD2BBCE8A400D7CD7D /* DepartmentListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36DBEFC2BBCE8A400D7CD7D /* DepartmentListView.swift */; };
 		D3DA100B2BBB9307003ADB02 /* The Tiny Met Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = D3DA100A2BBB9307003ADB02 /* The Tiny Met Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		D3DA10102BBB9307003ADB02 /* The_Metropolitan_Museum_of_Art_on_a_WatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DA100F2BBB9307003ADB02 /* The_Metropolitan_Museum_of_Art_on_a_WatchApp.swift */; };
 		D3DA10122BBB9307003ADB02 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DA10112BBB9307003ADB02 /* ContentView.swift */; };
 		D3DA10142BBB9308003ADB02 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3DA10132BBB9308003ADB02 /* Assets.xcassets */; };
 		D3DA10172BBB9308003ADB02 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3DA10162BBB9308003ADB02 /* Preview Assets.xcassets */; };
-		D3DA10242BBB9349003ADB02 /* TheMetMuseumAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DA10232BBB9349003ADB02 /* TheMetMuseumAPI.swift */; };
-		D3DA10262BBB9350003ADB02 /* Department.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DA10252BBB9350003ADB02 /* Department.swift */; };
-		D3DA10282BBB9355003ADB02 /* Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DA10272BBB9355003ADB02 /* Search.swift */; };
-		D3DA102A2BBB935B003ADB02 /* Objects.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DA10292BBB935B003ADB02 /* Objects.swift */; };
 		D3EDA7132BBCF62B00EA2B86 /* ObjectDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3EDA7122BBCF62B00EA2B86 /* ObjectDetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		D31E01082D3F1FAE00E84687 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D3DA0FFE2BBB9307003ADB02 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D31E00EC2D3F1FAC00E84687;
+			remoteInfo = "The Met for VisionOS";
+		};
 		D3DA100C2BBB9307003ADB02 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D3DA0FFE2BBB9307003ADB02 /* Project object */;
@@ -51,12 +53,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		D347A15D2CD0869100977486 /* OnFirstAppearModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnFirstAppearModifier.swift; sourceTree = "<group>"; };
-		D347A15F2CD086F400977486 /* CachedObjectDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachedObjectDetails.swift; sourceTree = "<group>"; };
-		D347A1612CD0871000977486 /* Object.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Object.swift; sourceTree = "<group>"; };
+		D31E00ED2D3F1FAC00E84687 /* The Met for VisionOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "The Met for VisionOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D31E00F02D3F1FAC00E84687 /* RealityKitContent */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = RealityKitContent; sourceTree = "<group>"; };
+		D31E01072D3F1FAE00E84687 /* The Met for VisionOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "The Met for VisionOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D31E01142D3F1FED00E84687 /* TheMetUtilities */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = TheMetUtilities; path = ../TheMetUtilities; sourceTree = SOURCE_ROOT; };
 		D347A1632CD0875200977486 /* ImageInspectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageInspectView.swift; sourceTree = "<group>"; };
 		D347A1652CD0877500977486 /* ObjectInfoSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectInfoSection.swift; sourceTree = "<group>"; };
-		D347A1672CD0886E00977486 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		D36DBEFC2BBCE8A400D7CD7D /* DepartmentListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepartmentListView.swift; sourceTree = "<group>"; };
 		D3DA10042BBB9307003ADB02 /* The Tiny Met.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "The Tiny Met.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3DA100A2BBB9307003ADB02 /* The Tiny Met Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "The Tiny Met Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -64,37 +66,76 @@
 		D3DA10112BBB9307003ADB02 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		D3DA10132BBB9308003ADB02 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D3DA10162BBB9308003ADB02 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		D3DA10232BBB9349003ADB02 /* TheMetMuseumAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheMetMuseumAPI.swift; sourceTree = "<group>"; };
-		D3DA10252BBB9350003ADB02 /* Department.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Department.swift; sourceTree = "<group>"; };
-		D3DA10272BBB9355003ADB02 /* Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Search.swift; sourceTree = "<group>"; };
-		D3DA10292BBB935B003ADB02 /* Objects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Objects.swift; sourceTree = "<group>"; };
 		D3EDA7122BBCF62B00EA2B86 /* ObjectDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		D31E01112D3F1FAE00E84687 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = D31E00EC2D3F1FAC00E84687 /* The Met for VisionOS */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		D31E00EE2D3F1FAC00E84687 /* The Met for VisionOS */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (D31E01112D3F1FAE00E84687 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = "The Met for VisionOS"; sourceTree = "<group>"; };
+		D31E010A2D3F1FAE00E84687 /* The Met for VisionOSTests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "The Met for VisionOSTests"; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
+
 /* Begin PBXFrameworksBuildPhase section */
-		D3DA10072BBB9307003ADB02 /* Frameworks */ = {
+		D31E00EA2D3F1FAC00E84687 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D32987A02D3F27180036756A /* TheMetUtilities in Frameworks */,
+				D31E00F22D3F1FAC00E84687 /* RealityKitContent in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D31E01042D3F1FAE00E84687 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D3DA10072BBB9307003ADB02 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D329878B2D3F21E80036756A /* TheMetUtilities in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		D347A15C2CD0868200977486 /* Helpers */ = {
+		D31E00EF2D3F1FAC00E84687 /* Packages */ = {
 			isa = PBXGroup;
 			children = (
-				D347A15F2CD086F400977486 /* CachedObjectDetails.swift */,
-				D347A15D2CD0869100977486 /* OnFirstAppearModifier.swift */,
+				D31E00F02D3F1FAC00E84687 /* RealityKitContent */,
 			);
-			path = Helpers;
+			path = Packages;
+			sourceTree = "<group>";
+		};
+		D32987892D3F21E80036756A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		D3DA0FFD2BBB9307003ADB02 = {
 			isa = PBXGroup;
 			children = (
+				D31E01142D3F1FED00E84687 /* TheMetUtilities */,
 				D3DA100E2BBB9307003ADB02 /* The Metropolitan Museum of Art on a Watch Watch App */,
+				D31E00EE2D3F1FAC00E84687 /* The Met for VisionOS */,
+				D31E00EF2D3F1FAC00E84687 /* Packages */,
+				D31E010A2D3F1FAE00E84687 /* The Met for VisionOSTests */,
+				D32987892D3F21E80036756A /* Frameworks */,
 				D3DA10052BBB9307003ADB02 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -104,6 +145,8 @@
 			children = (
 				D3DA10042BBB9307003ADB02 /* The Tiny Met.app */,
 				D3DA100A2BBB9307003ADB02 /* The Tiny Met Watch App.app */,
+				D31E00ED2D3F1FAC00E84687 /* The Met for VisionOS.app */,
+				D31E01072D3F1FAE00E84687 /* The Met for VisionOSTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -111,12 +154,8 @@
 		D3DA100E2BBB9307003ADB02 /* The Metropolitan Museum of Art on a Watch Watch App */ = {
 			isa = PBXGroup;
 			children = (
-				D347A15C2CD0868200977486 /* Helpers */,
-				D3DA10222BBB9341003ADB02 /* API */,
-				D3DA10212BBB933E003ADB02 /* Types */,
 				D3DA100F2BBB9307003ADB02 /* The_Metropolitan_Museum_of_Art_on_a_WatchApp.swift */,
 				D3DA10112BBB9307003ADB02 /* ContentView.swift */,
-				D347A1672CD0886E00977486 /* NetworkError.swift */,
 				D3DA10132BBB9308003ADB02 /* Assets.xcassets */,
 				D3DA10152BBB9308003ADB02 /* Preview Content */,
 				D36DBEFC2BBCE8A400D7CD7D /* DepartmentListView.swift */,
@@ -135,28 +174,56 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		D3DA10212BBB933E003ADB02 /* Types */ = {
-			isa = PBXGroup;
-			children = (
-				D3DA10252BBB9350003ADB02 /* Department.swift */,
-				D3DA10272BBB9355003ADB02 /* Search.swift */,
-				D3DA10292BBB935B003ADB02 /* Objects.swift */,
-				D347A1612CD0871000977486 /* Object.swift */,
-			);
-			path = Types;
-			sourceTree = "<group>";
-		};
-		D3DA10222BBB9341003ADB02 /* API */ = {
-			isa = PBXGroup;
-			children = (
-				D3DA10232BBB9349003ADB02 /* TheMetMuseumAPI.swift */,
-			);
-			path = API;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		D31E00EC2D3F1FAC00E84687 /* The Met for VisionOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D31E01122D3F1FAE00E84687 /* Build configuration list for PBXNativeTarget "The Met for VisionOS" */;
+			buildPhases = (
+				D31E00E92D3F1FAC00E84687 /* Sources */,
+				D31E00EA2D3F1FAC00E84687 /* Frameworks */,
+				D31E00EB2D3F1FAC00E84687 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				D31E00EE2D3F1FAC00E84687 /* The Met for VisionOS */,
+			);
+			name = "The Met for VisionOS";
+			packageProductDependencies = (
+				D31E00F12D3F1FAC00E84687 /* RealityKitContent */,
+				D329879F2D3F27180036756A /* TheMetUtilities */,
+			);
+			productName = "The Met for VisionOS";
+			productReference = D31E00ED2D3F1FAC00E84687 /* The Met for VisionOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+		D31E01062D3F1FAE00E84687 /* The Met for VisionOSTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D31E01132D3F1FAE00E84687 /* Build configuration list for PBXNativeTarget "The Met for VisionOSTests" */;
+			buildPhases = (
+				D31E01032D3F1FAE00E84687 /* Sources */,
+				D31E01042D3F1FAE00E84687 /* Frameworks */,
+				D31E01052D3F1FAE00E84687 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D31E01092D3F1FAE00E84687 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				D31E010A2D3F1FAE00E84687 /* The Met for VisionOSTests */,
+			);
+			name = "The Met for VisionOSTests";
+			packageProductDependencies = (
+			);
+			productName = "The Met for VisionOSTests";
+			productReference = D31E01072D3F1FAE00E84687 /* The Met for VisionOSTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		D3DA10032BBB9307003ADB02 /* The Tiny Met */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = D3DA101E2BBB9308003ADB02 /* Build configuration list for PBXNativeTarget "The Tiny Met" */;
@@ -198,9 +265,16 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1530;
+				LastSwiftUpdateCheck = 1620;
 				LastUpgradeCheck = 1530;
 				TargetAttributes = {
+					D31E00EC2D3F1FAC00E84687 = {
+						CreatedOnToolsVersion = 16.2;
+					};
+					D31E01062D3F1FAE00E84687 = {
+						CreatedOnToolsVersion = 16.2;
+						TestTargetID = D31E00EC2D3F1FAC00E84687;
+					};
 					D3DA10032BBB9307003ADB02 = {
 						CreatedOnToolsVersion = 15.3;
 					};
@@ -224,11 +298,27 @@
 			targets = (
 				D3DA10032BBB9307003ADB02 /* The Tiny Met */,
 				D3DA10092BBB9307003ADB02 /* The Tiny Met Watch App */,
+				D31E00EC2D3F1FAC00E84687 /* The Met for VisionOS */,
+				D31E01062D3F1FAE00E84687 /* The Met for VisionOSTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		D31E00EB2D3F1FAC00E84687 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D31E01052D3F1FAE00E84687 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D3DA10022BBB9307003ADB02 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -248,30 +338,41 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		D31E00E92D3F1FAC00E84687 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D31E01032D3F1FAE00E84687 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D3DA10062BBB9307003ADB02 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				D3DA10122BBB9307003ADB02 /* ContentView.swift in Sources */,
 				D347A1642CD0875200977486 /* ImageInspectView.swift in Sources */,
-				D3DA10242BBB9349003ADB02 /* TheMetMuseumAPI.swift in Sources */,
-				D3DA10282BBB9355003ADB02 /* Search.swift in Sources */,
 				D3DA10102BBB9307003ADB02 /* The_Metropolitan_Museum_of_Art_on_a_WatchApp.swift in Sources */,
-				D347A15E2CD0869100977486 /* OnFirstAppearModifier.swift in Sources */,
 				D36DBEFD2BBCE8A400D7CD7D /* DepartmentListView.swift in Sources */,
-				D347A1622CD0871000977486 /* Object.swift in Sources */,
-				D3DA102A2BBB935B003ADB02 /* Objects.swift in Sources */,
-				D347A1682CD0886E00977486 /* NetworkError.swift in Sources */,
 				D3EDA7132BBCF62B00EA2B86 /* ObjectDetailView.swift in Sources */,
 				D347A1662CD0877500977486 /* ObjectInfoSection.swift in Sources */,
-				D3DA10262BBB9350003ADB02 /* Department.swift in Sources */,
-				D347A1602CD086F400977486 /* CachedObjectDetails.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		D31E01092D3F1FAE00E84687 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D31E00EC2D3F1FAC00E84687 /* The Met for VisionOS */;
+			targetProxy = D31E01082D3F1FAE00E84687 /* PBXContainerItemProxy */;
+		};
 		D3DA100D2BBB9307003ADB02 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = D3DA10092BBB9307003ADB02 /* The Tiny Met Watch App */;
@@ -280,6 +381,106 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		D31E010D2D3F1FAE00E84687 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"The Met for VisionOS/Preview Content\"";
+				DEVELOPMENT_TEAM = ZU78LZES28;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "$(TARGET_NAME)/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.dakotakim.The-Met-for-VisionOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = xros;
+				SUPPORTED_PLATFORMS = "xros xrsimulator";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 7;
+				XROS_DEPLOYMENT_TARGET = 2.2;
+			};
+			name = Debug;
+		};
+		D31E010E2D3F1FAE00E84687 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"The Met for VisionOS/Preview Content\"";
+				DEVELOPMENT_TEAM = ZU78LZES28;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "$(TARGET_NAME)/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.dakotakim.The-Met-for-VisionOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = xros;
+				SUPPORTED_PLATFORMS = "xros xrsimulator";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 7;
+				VALIDATE_PRODUCT = YES;
+				XROS_DEPLOYMENT_TARGET = 2.2;
+			};
+			name = Release;
+		};
+		D31E010F2D3F1FAE00E84687 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = ZU78LZES28;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.dakotakim.The-Met-for-VisionOSTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = xros;
+				SUPPORTED_PLATFORMS = "xros xrsimulator";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 7;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/The Met for VisionOS.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/The Met for VisionOS";
+				XROS_DEPLOYMENT_TARGET = 2.2;
+			};
+			name = Debug;
+		};
+		D31E01102D3F1FAE00E84687 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = ZU78LZES28;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.dakotakim.The-Met-for-VisionOSTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = xros;
+				SUPPORTED_PLATFORMS = "xros xrsimulator";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 7;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/The Met for VisionOS.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/The Met for VisionOS";
+				VALIDATE_PRODUCT = YES;
+				XROS_DEPLOYMENT_TARGET = 2.2;
+			};
+			name = Release;
+		};
 		D3DA10182BBB9308003ADB02 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -491,6 +692,24 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		D31E01122D3F1FAE00E84687 /* Build configuration list for PBXNativeTarget "The Met for VisionOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D31E010D2D3F1FAE00E84687 /* Debug */,
+				D31E010E2D3F1FAE00E84687 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D31E01132D3F1FAE00E84687 /* Build configuration list for PBXNativeTarget "The Met for VisionOSTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D31E010F2D3F1FAE00E84687 /* Debug */,
+				D31E01102D3F1FAE00E84687 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		D3DA10012BBB9307003ADB02 /* Build configuration list for PBXProject "The Tiny Met" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -519,6 +738,21 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D31E00F12D3F1FAC00E84687 /* RealityKitContent */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = RealityKitContent;
+		};
+		D329878A2D3F21E80036756A /* TheMetUtilities */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = TheMetUtilities;
+		};
+		D329879F2D3F27180036756A /* TheMetUtilities */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = TheMetUtilities;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = D3DA0FFE2BBB9307003ADB02 /* Project object */;
 }

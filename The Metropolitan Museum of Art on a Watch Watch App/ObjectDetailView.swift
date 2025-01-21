@@ -7,6 +7,7 @@
 
 import SwiftUI
 import AuthenticationServices
+import TheMetUtilities
 
 struct ObjectDetailView: View {
     let objectDetails: ObjectDetails

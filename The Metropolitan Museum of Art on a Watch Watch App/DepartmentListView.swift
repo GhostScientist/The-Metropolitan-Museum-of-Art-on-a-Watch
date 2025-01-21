@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import TheMetUtilities
 
 struct DepartmentListView: View {
     @State private var objects: [ObjectDetails] = []

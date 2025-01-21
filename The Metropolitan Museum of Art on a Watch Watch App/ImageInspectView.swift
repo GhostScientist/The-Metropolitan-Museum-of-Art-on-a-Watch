@@ -13,7 +13,6 @@ struct ImageInspectView: View {
     @State private var offset: CGSize = .zero
     
     var body: some View {
-        VStack {
             AsyncImage(url: URL(string: imageURL)) { image in
                 image
                     .resizable()
@@ -43,24 +42,6 @@ struct ImageInspectView: View {
             } placeholder: {
                 ProgressView()
             }
-            
-            HStack {
-                Button(action: {
-                    withAnimation {
-                        scale = max(scale - 0.5, 1.0)
-                    }
-                }) {
-                    Image(systemName: "minus")
-                }
-                
-                Button(action: {
-                    withAnimation {
-                        scale = min(scale + 0.5, 5.0)
-                    }
-                }) {
-                    Image(systemName: "plus")
-                }
-            }
-        }
+        
     }
 }

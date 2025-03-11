@@ -1,0 +1,30 @@
+# Swift Package Manager
+.build/
+.swiftpm/
+xcuserdata/
+*.xcodeproj/xcuserdata/
+*.xcworkspace/xcuserdata/
+.netrc
+
+*.pbxproj
+
+# Package Dependencies
+*.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/
+*.xcodeproj/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist
+**/Package.resolved
+
+# RealityKit Content
+Packages/RealityKitContent/**
+**/RealityKitContent.swift
+**/RealityKitContent.rkassets/**
+
+# Asset Files
+**/Assets.xcassets/**/*.imageset
+**/Assets.xcassets/**/*.solidimagestack
+**/Assets.xcassets/**/*.solidimagesetacklayer
+**/Assets.xcassets/**/Contents.json
+
+# Project-specific ignores
+**/SceneMetadataList.json
+**/Settings.rcprojectdata
+**/*.usda

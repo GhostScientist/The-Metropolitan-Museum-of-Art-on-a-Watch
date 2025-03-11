@@ -6,7 +6,8 @@
 //
 
 import SwiftUI
-import RealityKit
+// Remove RealityKit import since we don't need it anymore
+// import RealityKit
 
 struct OnboardingView: View {
     var onComplete: () -> Void
@@ -205,194 +206,7 @@ struct OnboardingView: View {
         }
     }
     
-    // Helper functions to create and update 3D models
-    private func createModel(for modelName: String) -> ModelEntity {
-        // In a real app, we would load actual models from RealityKit Content
-        // For now we're creating simple placeholder models
-        switch modelName {
-        case "museum":
-            // Museum building model
-            let meshResource = MeshResource.generateBox(size: 0.15, cornerRadius: 0.02)
-            let material = SimpleMaterial(color: .white, roughness: 0.2, isMetallic: true)
-            let entity = ModelEntity(mesh: meshResource, materials: [material])
-            
-            // Add columns
-            for i in 0..<4 {
-                let columnMesh = MeshResource.generateBox(size: [0.02, 0.1, 0.02])
-                let columnMaterial = SimpleMaterial(color: .white, roughness: 0.1, isMetallic: false)
-                let column = ModelEntity(mesh: columnMesh, materials: [columnMaterial])
-                
-                // Position columns in front
-                let xPos = Float(-0.06 + Float(i) * 0.04)
-                column.position = SIMD3(xPos, -0.05, 0.076)
-                entity.addChild(column)
-            }
-            
-            // Add roof
-            let roofMesh = MeshResource.generateBox(size: [0.17, 0.03, 0.17], cornerRadius: 0.01)
-            let roofMaterial = SimpleMaterial(color: .white.withAlphaComponent(0.9), roughness: 0.2, isMetallic: true)
-            let roof = ModelEntity(mesh: roofMesh, materials: [roofMaterial])
-            roof.position = SIMD3(0, 0.08, 0)
-            entity.addChild(roof)
-            
-            return entity
-            
-        case "artworks":
-            // Stacked artwork frames
-            let rootEntity = ModelEntity()
-            
-            // Create multiple frames in a artistic arrangement
-            for i in 0..<5 {
-                let frameWidth = Float.random(in: 0.08...0.12)
-                let frameHeight = Float.random(in: 0.08...0.12)
-                let frameMesh = MeshResource.generatePlane(width: frameWidth, height: frameHeight)
-                let frameColor = [
-                    Color(red: 0.9, green: 0.7, blue: 0.3),
-                    Color(red: 0.3, green: 0.5, blue: 0.9),
-                    Color(red: 0.7, green: 0.3, blue: 0.5),
-                    Color(red: 0.4, green: 0.7, blue: 0.4),
-                    Color(red: 0.8, green: 0.4, blue: 0.2)
-                ][i % 5]
-                
-                // Convert SwiftUI Color to UIColor for SimpleMaterial
-                let uiFrameColor = UIColor(frameColor)
-                let frameMaterial = SimpleMaterial(color: uiFrameColor, roughness: 0.3, isMetallic: false)
-                let frame = ModelEntity(mesh: frameMesh, materials: [frameMaterial])
-                
-                // Position frames in a scattered artistic arrangement
-                let xOffset = Float.random(in: -0.1...0.1)
-                let yOffset = Float.random(in: -0.1...0.1)
-                let zOffset = Float(i) * 0.02
-                frame.position = SIMD3(xOffset, yOffset, zOffset)
-                
-                // Random rotation
-                frame.orientation = simd_quatf(angle: .random(in: -0.2...0.2), axis: [0, 0, 1])
-                
-                rootEntity.addChild(frame)
-            }
-            
-            return rootEntity
-            
-        case "immersive":
-            // Eye-like structure with rays
-            let rootEntity = ModelEntity()
-            
-            // Create central eye
-            let eyeMesh = MeshResource.generateSphere(radius: 0.05)
-            let eyeMaterial = SimpleMaterial(color: .white, roughness: 0.1, isMetallic: true)
-            let eye = ModelEntity(mesh: eyeMesh, materials: [eyeMaterial])
-            rootEntity.addChild(eye)
-            
-            // Add iris
-            let irisMesh = MeshResource.generateSphere(radius: 0.025)
-            // Convert SwiftUI Color to UIColor for SimpleMaterial
-            let uiIrisColor = UIColor(Color(red: 0.1, green: 0.4, blue: 0.8))
-            let irisMaterial = SimpleMaterial(color: uiIrisColor, roughness: 0.1, isMetallic: true)
-            let iris = ModelEntity(mesh: irisMesh, materials: [irisMaterial])
-            iris.position = SIMD3(0, 0, 0.03)
-            eye.addChild(iris)
-            
-            // Add rays emanating from the eye
-            for i in 0..<12 {
-                let rayMesh = MeshResource.generateBox(size: [0.01, 0.01, 0.15])
-                let rayMaterial = SimpleMaterial(color: .white.withAlphaComponent(0.7), roughness: 0.3, isMetallic: false)
-                let ray = ModelEntity(mesh: rayMesh, materials: [rayMaterial])
-                
-                // Position rays in a circle
-                let angle = Float(i) * (2 * Float.pi / 12)
-                let radius: Float = 0.12
-                ray.position = SIMD3(radius * sin(angle), radius * cos(angle), 0)
-                
-                // Orient ray to point outward
-                ray.look(at: SIMD3(0, 0, 0), from: ray.position, upVector: SIMD3(0, 0, 1), relativeTo: nil)
-                
-                rootEntity.addChild(ray)
-            }
-            
-            return rootEntity
-            
-        case "gallery":
-            // Personal gallery model
-            let rootEntity = ModelEntity()
-            
-            // Floor
-            let floorMesh = MeshResource.generatePlane(width: 0.3, height: 0.3)
-            // Convert SwiftUI Color to UIColor for SimpleMaterial
-            let uiFloorColor = UIColor(Color(white: 0.9))
-            let floorMaterial = SimpleMaterial(color: uiFloorColor, roughness: 0.2, isMetallic: false)
-            let floor = ModelEntity(mesh: floorMesh, materials: [floorMaterial])
-            floor.position = SIMD3(0, -0.1, 0)
-            rootEntity.addChild(floor)
-            
-            // Walls
-            let wallMesh = MeshResource.generatePlane(width: 0.3, height: 0.15)
-            // Convert SwiftUI Color to UIColor for SimpleMaterial
-            let uiWallColor = UIColor(Color(white: 0.95))
-            let wallMaterial = SimpleMaterial(color: uiWallColor, roughness: 0.1, isMetallic: false)
-            
-            // Back wall
-            let backWall = ModelEntity(mesh: wallMesh, materials: [wallMaterial])
-            backWall.position = SIMD3(0, -0.025, -0.15)
-            backWall.orientation = simd_quatf(angle: Float.pi/2, axis: [1, 0, 0])
-            rootEntity.addChild(backWall)
-            
-            // Left wall
-            let leftWall = ModelEntity(mesh: wallMesh, materials: [wallMaterial])
-            leftWall.position = SIMD3(-0.15, -0.025, 0)
-            leftWall.orientation = simd_quatf(angle: Float.pi/2, axis: [0, 0, 1])
-            rootEntity.addChild(leftWall)
-            
-            // Right wall
-            let rightWall = ModelEntity(mesh: wallMesh, materials: [wallMaterial])
-            rightWall.position = SIMD3(0.15, -0.025, 0)
-            rightWall.orientation = simd_quatf(angle: -Float.pi/2, axis: [0, 0, 1])
-            rootEntity.addChild(rightWall)
-            
-            // Add tiny artwork frames
-            for i in 0..<3 {
-                let frameWidth: Float = 0.06
-                let frameHeight: Float = 0.04
-                let frameMesh = MeshResource.generatePlane(width: frameWidth, height: frameHeight)
-                // Convert SwiftUI Color to UIColor for SimpleMaterial
-                let uiFrameColor = UIColor(Color(white: 0.2))
-                let frameMaterial = SimpleMaterial(color: uiFrameColor, roughness: 0.1, isMetallic: false)
-                let frame = ModelEntity(mesh: frameMesh, materials: [frameMaterial])
-                
-                // Position on back wall
-                let xPos = Float(-0.08 + Float(i) * 0.08)
-                frame.position = SIMD3(xPos, 0, -0.145)
-                frame.orientation = simd_quatf(angle: Float.pi/2, axis: [1, 0, 0])
-                
-                rootEntity.addChild(frame)
-            }
-            
-            // Add a tiny person silhouette
-            let personMesh = MeshResource.generateBox(size: [0.015, 0.04, 0.01])
-            // Convert SwiftUI Color to UIColor for SimpleMaterial
-            let uiPersonColor = UIColor(Color(white: 0.2))
-            let personMaterial = SimpleMaterial(color: uiPersonColor, roughness: 0.1, isMetallic: false)
-            let person = ModelEntity(mesh: personMesh, materials: [personMaterial])
-            person.position = SIMD3(0, -0.08, 0)
-            rootEntity.addChild(person)
-            
-            return rootEntity
-            
-        default:
-            // Default simple sphere
-            let mesh = MeshResource.generateSphere(radius: 0.1)
-            let material = SimpleMaterial(color: .white, roughness: 0.5, isMetallic: true)
-            return ModelEntity(mesh: mesh, materials: [material])
-        }
-    }
-    
-    private func updateModel(_ entity: Entity, for modelName: String) {
-        // In a real implementation, this would update the model's appearance
-        // Here we're just doing a simple rotation or adjustment
-        if let modelEntity = entity as? ModelEntity {
-            // Apply subtle animation or changes
-            modelEntity.transform.rotation = simd_quatf(angle: .pi * Float(rotationAngle) / 180, axis: [0, 1, 0])
-        }
-    }
+    // Remove all the 3D model helper functions since they're no longer used
 }
 
 struct OnboardingPage {
@@ -400,7 +214,7 @@ struct OnboardingPage {
     let description: String
     let imageName: String
     let color: Color
-    let modelName: String
+    let modelName: String // We keep this for data structure compatibility, even though we don't use 3D models
 }
 
 #Preview {

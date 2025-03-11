@@ -12,8 +12,8 @@ import TheMetUtilities
 @MainActor
 @Observable
 class AppModel {
-    // Immersive space states
-    let immersiveSpaceID = "ImmersiveSpace"
+    // Gallery window state (renamed from immersive space)
+    let immersiveSpaceID = "gallery-window" // renamed for clarity but keeping variable name for compatibility
     enum ImmersiveSpaceState {
         case closed
         case inTransition
@@ -57,6 +57,12 @@ class AppModel {
     }
     
     // MARK: - Methods
+    
+    func closeGallery() {
+        // Method to close the gallery window
+        NotificationCenter.default.post(name: NSNotification.Name("CloseGalleryWindow"), object: nil)
+        immersiveSpaceState = .closed
+    }
     
     func addToViewingHistory(artwork: ObjectDetails) {
         // Create a new history entry

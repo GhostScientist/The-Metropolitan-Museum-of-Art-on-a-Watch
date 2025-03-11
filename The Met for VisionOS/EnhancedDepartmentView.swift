@@ -6,7 +6,8 @@
 //
 
 import SwiftUI
-import RealityKit
+// Remove unused RealityKit import
+// import RealityKit
 import TheMetUtilities
 
 struct EnhancedDepartmentView: View {

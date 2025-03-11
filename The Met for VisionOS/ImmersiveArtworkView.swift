@@ -6,7 +6,8 @@
 //
 
 import SwiftUI
-import RealityKit
+// Remove RealityKit since we're not using 3D models anymore
+// import RealityKit
 
 struct ImmersiveArtworkView: View {
     @Environment(AppModel.self) private var appModel
@@ -16,7 +17,7 @@ struct ImmersiveArtworkView: View {
     
     @State private var scale: CGFloat = 1.0
     @State private var rotation: Angle = .zero
-    @State private var offset: SIMD3<Float> = .zero
+    @State private var offset: CGSize = .zero
     @State private var showControls = true
     @State private var frameStyle: FrameStyle = .modern
     @State private var backgroundStyle: BackgroundStyle = .museum
@@ -248,115 +249,7 @@ struct ImmersiveArtworkView: View {
         }
     }
     
-    private func addFrame(to entity: ModelEntity, width: Float, height: Float) async {
-        // Add frame based on selected style
-        switch frameStyle {
-        case .none:
-            // No frame
-            break
-            
-        case .simple:
-            // Simple frame
-            let frameWidth: Float = 0.05
-            let frameDepth: Float = 0.01
-            
-            // Create frame parts
-            let topFrame = ModelEntity(mesh: .generateBox(width: width + frameWidth * 2, height: frameWidth, depth: frameDepth))
-            let bottomFrame = ModelEntity(mesh: .generateBox(width: width + frameWidth * 2, height: frameWidth, depth: frameDepth))
-            let leftFrame = ModelEntity(mesh: .generateBox(width: frameWidth, height: height, depth: frameDepth))
-            let rightFrame = ModelEntity(mesh: .generateBox(width: frameWidth, height: height, depth: frameDepth))
-            
-            // Position frame parts
-            topFrame.position = SIMD3<Float>(0, height / 2 + frameWidth / 2, -frameDepth / 2)
-            bottomFrame.position = SIMD3<Float>(0, -height / 2 - frameWidth / 2, -frameDepth / 2)
-            leftFrame.position = SIMD3<Float>(-width / 2 - frameWidth / 2, 0, -frameDepth / 2)
-            rightFrame.position = SIMD3<Float>(width / 2 + frameWidth / 2, 0, -frameDepth / 2)
-            
-            // Create frame material
-            let frameMaterial = SimpleMaterial(color: .black, roughness: 0.5, isMetallic: false)
-            topFrame.model?.materials = [frameMaterial]
-            bottomFrame.model?.materials = [frameMaterial]
-            leftFrame.model?.materials = [frameMaterial]
-            rightFrame.model?.materials = [frameMaterial]
-            
-            // Add frame parts to entity
-            entity.addChild(topFrame)
-            entity.addChild(bottomFrame)
-            entity.addChild(leftFrame)
-            entity.addChild(rightFrame)
-            
-        case .modern:
-            // Modern frame with shadow effect
-            let frameWidth: Float = 0.03
-            let frameDepth: Float = 0.02
-            let shadowOffset: Float = 0.005
-            
-            // Create main frame
-            let frame = ModelEntity(mesh: .generateBox(width: width + frameWidth * 2, height: height + frameWidth * 2, depth: frameDepth))
-            frame.position = SIMD3<Float>(0, 0, -frameDepth / 2 - 0.001)
-            
-            // Create shadow
-            let shadow = ModelEntity(mesh: .generateBox(width: width + frameWidth * 2 + shadowOffset * 2, height: height + frameWidth * 2 + shadowOffset * 2, depth: 0.001))
-            shadow.position = SIMD3<Float>(shadowOffset, -shadowOffset, -frameDepth - 0.002)
-            
-            // Create materials
-            let frameMaterial = SimpleMaterial(color: .white, roughness: 0.1, isMetallic: false)
-            let shadowMaterial = SimpleMaterial(color: .black.withAlphaComponent(0.3), roughness: 1.0, isMetallic: false)
-            
-            frame.model?.materials = [frameMaterial]
-            shadow.model?.materials = [shadowMaterial]
-            
-            // Add to entity
-            entity.addChild(shadow)
-            entity.addChild(frame)
-            
-        case .ornate:
-            // Ornate gold frame
-            let frameWidth: Float = 0.08
-            let frameDepth: Float = 0.03
-            
-            // Create frame parts with rounded corners
-            let topFrame = ModelEntity(mesh: .generateBox(width: width + frameWidth * 2, height: frameWidth, depth: frameDepth, cornerRadius: frameWidth / 4))
-            let bottomFrame = ModelEntity(mesh: .generateBox(width: width + frameWidth * 2, height: frameWidth, depth: frameDepth, cornerRadius: frameWidth / 4))
-            let leftFrame = ModelEntity(mesh: .generateBox(width: frameWidth, height: height, depth: frameDepth, cornerRadius: frameWidth / 4))
-            let rightFrame = ModelEntity(mesh: .generateBox(width: frameWidth, height: height, depth: frameDepth, cornerRadius: frameWidth / 4))
-            
-            // Position frame parts
-            topFrame.position = SIMD3<Float>(0, height / 2 + frameWidth / 2, -frameDepth / 2)
-            bottomFrame.position = SIMD3<Float>(0, -height / 2 - frameWidth / 2, -frameDepth / 2)
-            leftFrame.position = SIMD3<Float>(-width / 2 - frameWidth / 2, 0, -frameDepth / 2)
-            rightFrame.position = SIMD3<Float>(width / 2 + frameWidth / 2, 0, -frameDepth / 2)
-            
-            // Create ornate gold material
-            let goldMaterial = SimpleMaterial(color: .init(red: 0.85, green: 0.7, blue: 0.25, alpha: 1.0), roughness: 0.3, isMetallic: true)
-            topFrame.model?.materials = [goldMaterial]
-            bottomFrame.model?.materials = [goldMaterial]
-            leftFrame.model?.materials = [goldMaterial]
-            rightFrame.model?.materials = [goldMaterial]
-            
-            // Add frame parts to entity
-            entity.addChild(topFrame)
-            entity.addChild(bottomFrame)
-            entity.addChild(leftFrame)
-            entity.addChild(rightFrame)
-            
-        case .floating:
-            // Floating effect with shadow
-            let shadowDepth: Float = 0.01
-            let shadowOffset: Float = 0.02
-            
-            // Create shadow
-            let shadow = ModelEntity(mesh: .generatePlane(width: width + shadowOffset * 2, height: height + shadowOffset * 2))
-            shadow.position = SIMD3<Float>(0, 0, -shadowDepth)
-            
-            // Create shadow material
-            let shadowMaterial = SimpleMaterial(color: .black.withAlphaComponent(0.2), roughness: 1.0, isMetallic: false)
-            shadow.model?.materials = [shadowMaterial]
-            
-            // Add shadow to entity
-            entity.addChild(shadow)
-        }
-    }
+    // Remove the 3D addFrame method since it's no longer needed
 }
 
 #Preview {

@@ -6,14 +6,16 @@
 //
 
 import SwiftUI
-import RealityKit
+// Remove RealityKit since we're not using 3D models anymore
+// import RealityKit
 import TheMetUtilities
 
 struct MetSpatialExperienceView: View {
     @Environment(AppModel.self) private var appModel
     @Environment(\.openWindow) private var openWindow
-    @Environment(\.openImmersiveSpace) private var openImmersiveSpace
-    @Environment(\.dismissImmersiveSpace) private var dismissImmersiveSpace
+    // Remove these since we're not using immersive spaces anymore
+    // @Environment(\.openImmersiveSpace) private var openImmersiveSpace
+    // @Environment(\.dismissImmersiveSpace) private var dismissImmersiveSpace
     
     @State private var departments: [Department] = []
     @State private var isLoading: Bool = false
@@ -41,10 +43,10 @@ struct MetSpatialExperienceView: View {
                     
                     Spacer()
                     
-                    // Toggle immersive gallery button
+                    // Toggle gallery button
                     if showGalleryButton {
                         Button {
-                            toggleImmersiveSpace()
+                            toggleGallery()
                         } label: {
                             Label(
                                 appModel.immersiveSpaceState == .open ? "Close Gallery" : "Open Gallery",
@@ -174,23 +176,18 @@ struct MetSpatialExperienceView: View {
         }
     }
     
-    private func toggleImmersiveSpace() {
+    private func toggleGallery() {
         Task {
             switch appModel.immersiveSpaceState {
             case .open:
                 appModel.immersiveSpaceState = .inTransition
-                await dismissImmersiveSpace()
+                // Use the new closeGallery method
+                appModel.closeGallery()
                 
             case .closed:
                 appModel.immersiveSpaceState = .inTransition
-                switch await openImmersiveSpace(id: appModel.immersiveSpaceID) {
-                case .opened:
-                    break
-                case .userCancelled, .error:
-                    fallthrough
-                @unknown default:
-                    appModel.immersiveSpaceState = .closed
-                }
+                // Open a window instead of an immersive space
+                openWindow(id: appModel.immersiveSpaceID)
                 
             case .inTransition:
                 break

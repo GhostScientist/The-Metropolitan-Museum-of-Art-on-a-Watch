@@ -6,8 +6,9 @@
 //
 
 import SwiftUI
-import RealityKit
-import RealityKitContent
+// Remove unused imports
+// import RealityKit
+// import RealityKitContent
 import TheMetUtilities
 
 struct ContentView: View {

@@ -6,12 +6,14 @@
 //
 
 import SwiftUI
-import RealityKit
+// Remove RealityKit since we're not using 3D models anymore
+// import RealityKit
 import TheMetUtilities
 
 struct MetGalleryImmersiveView: View {
     @Environment(AppModel.self) private var appModel
     @Environment(\.openWindow) private var openWindow
+    @Environment(\.dismiss) private var dismiss
     
     @State private var featuredArtworks: [ObjectDetails] = []
     @State private var selectedArtwork: ObjectDetails?
@@ -21,9 +23,6 @@ struct MetGalleryImmersiveView: View {
     @State private var lightingStyle: LightingStyle = .natural
     
     private let metMuseumClient = MetMuseumClient()
-    
-    // Define a custom identity quaternion since the built-in one is internal
-    private let identityQuaternion = simd_quatf(ix: 0, iy: 0, iz: 0, r: 1)
     
     enum GalleryStyle: String, CaseIterable, Identifiable {
         case modern = "Modern"
@@ -107,7 +106,7 @@ struct MetGalleryImmersiveView: View {
                 }
             }
             .sheet(item: $selectedArtwork) { artwork in
-                EnhancedArtworkDetailView(objectID: artwork.objectID)
+                EnhancedArtworkDetailView(objectDetails: artwork)
                     .environment(appModel)
             }
             .sheet(isPresented: $showOptions) {
@@ -119,6 +118,22 @@ struct MetGalleryImmersiveView: View {
         }
         .onAppear {
             loadFeaturedArtworks()
+            
+            // Set up notification observer for window closing
+            NotificationCenter.default.addObserver(
+                forName: NSNotification.Name("CloseGalleryWindow"),
+                object: nil,
+                queue: .main) { _ in
+                dismiss()
+            }
+        }
+        .onDisappear {
+            // Remove notification observer
+            NotificationCenter.default.removeObserver(
+                self,
+                name: NSNotification.Name("CloseGalleryWindow"),
+                object: nil
+            )
         }
     }
     
@@ -131,11 +146,12 @@ struct MetGalleryImmersiveView: View {
                 let departments = try await metMuseumClient.fetchDepartments().departments
                 
                 if let randomDepartment = departments.randomElement() {
-                    // Then get objects for that department
-                    let departmentObjects = try await metMuseumClient.fetchObjectsByDepartment(departmentID: randomDepartment.departmentId)
+                    // Instead of using fetchDepartmentObjects, use searchObjects with the department name
+                    let departmentName = randomDepartment.displayName
+                    let searchResults = try await metMuseumClient.searchObjects(query: SearchQuery(query: departmentName))
                     
-                    // Select a random subset
-                    let selectedObjectIDs = Array(departmentObjects.objectIDs.prefix(15).shuffled())
+                    // Select a random subset from the search results
+                    let selectedObjectIDs = Array(searchResults.objectIDs.prefix(15).shuffled())
                     
                     // Fetch details for each object
                     var loadedArtworks: [ObjectDetails] = []
@@ -221,8 +237,8 @@ struct ArtworkCard: View {
                     .lineLimit(2)
                     .foregroundStyle(textColorForStyle(galleryStyle))
                 
-                if let artist = artwork.artistDisplayName, !artist.isEmpty {
-                    Text(artist)
+                if !artwork.artistDisplayName.isEmpty {
+                    Text(artwork.artistDisplayName)
                         .font(.subheadline)
                         .foregroundStyle(textColorForStyle(galleryStyle).opacity(0.8))
                 }
@@ -301,7 +317,7 @@ struct GalleryOptionsView: View {
                     .font(.headline)
                 
                 Picker("Gallery Style", selection: $galleryStyle) {
-                    ForEach(GalleryStyle.allCases) { style in
+                    ForEach(MetGalleryImmersiveView.GalleryStyle.allCases) { style in
                         Text(style.rawValue).tag(style)
                     }
                 }
@@ -313,7 +329,7 @@ struct GalleryOptionsView: View {
                     .font(.headline)
                 
                 Picker("Lighting Style", selection: $lightingStyle) {
-                    ForEach(LightingStyle.allCases) { style in
+                    ForEach(MetGalleryImmersiveView.LightingStyle.allCases) { style in
                         Text(style.rawValue).tag(style)
                     }
                 }

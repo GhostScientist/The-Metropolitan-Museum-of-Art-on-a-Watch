@@ -75,69 +75,79 @@ struct ImmersiveArtworkView: View {
                             .frame(maxWidth: .infinity, maxHeight: .infinity)
                     }
                     
-                    // 3D Artwork display
-                    RealityView { content in
-                        // Create a plane for the image
-                        let planeMesh = MeshResource.generatePlane(width: 1, height: 1)
-                        let planeEntity = ModelEntity(mesh: planeMesh)
-                        
-                        // Add the entity to the content first
-                        content.add(planeEntity)
-                        
-                        // Create a material with the image
-                        Task {
-                            do {
-                                let imageURL = URL(string: imageURL)!
-                                let imageData = try await URLSession.shared.data(from: imageURL).0
-                                if let uiImage = UIImage(data: imageData) {
-                                    // Use TextureResource.load(named:) instead of await
-                                    let texture = try TextureResource.load(contentsOf: imageURL)
-                                    
-                                    // Calculate aspect ratio
-                                    let aspectRatio = uiImage.size.width / uiImage.size.height
-                                    
-                                    // Resize the plane to match the image aspect ratio
-                                    let width: Float = aspectRatio >= 1.0 ? 1.0 : Float(aspectRatio)
-                                    let height: Float = aspectRatio >= 1.0 ? 1.0 / Float(aspectRatio) : 1.0
-                                    
-                                    planeEntity.model?.mesh = MeshResource.generatePlane(width: width, height: height)
-                                    
-                                    // Create material with the image
-                                    var material = UnlitMaterial()
-                                    material.color = .init(texture: .init(texture))
-                                    planeEntity.model?.materials = [material]
-                                    
-                                    // Add frame based on selected style
-                                    await addFrame(to: planeEntity, width: width, height: height)
-                                    
-                                    await MainActor.run {
-                                        isLoading = false
-                                    }
+                    // Replace 3D Artwork display with 2D AsyncImage
+                    AsyncImage(url: URL(string: imageURL)) { phase in
+                        switch phase {
+                        case .empty:
+                            ProgressView()
+                                .scaleEffect(1.5)
+                                .onAppear {
+                                    isLoading = true
                                 }
-                            } catch {
-                                print("Error loading image: \(error)")
-                                await MainActor.run {
+                        case .success(let image):
+                            image
+                                .resizable()
+                                .scaledToFit()
+                                .onAppear {
                                     isLoading = false
                                 }
-                            }
-                        }
-                    } update: { content in
-                        // Update the content when properties change
-                        if let planeEntity = content.entities.first {
-                            planeEntity.transform.scale = SIMD3<Float>(repeating: Float(scale))
-                            planeEntity.transform.rotation = simd_quatf(angle: Float(rotation.radians), axis: SIMD3<Float>(0, 1, 0))
-                            planeEntity.transform.translation = offset
+                                .scaleEffect(scale)
+                                .rotationEffect(rotation)
+                                // Apply frame based on selected style
+                                .overlay {
+                                    if frameStyle != .none {
+                                        GeometryReader { geo in 
+                                            let width = geo.size.width
+                                            let height = geo.size.height
+                                            
+                                            ZStack {
+                                                // Frame styles
+                                                switch frameStyle {
+                                                case .simple:
+                                                    Rectangle()
+                                                        .stroke(Color(white: 0.2), lineWidth: 4)
+                                                case .modern:
+                                                    Rectangle()
+                                                        .stroke(Color.white, lineWidth: 3)
+                                                        .padding(3)
+                                                        .background(
+                                                            Rectangle()
+                                                                .stroke(Color(white: 0.2), lineWidth: 2)
+                                                        )
+                                                case .ornate:
+                                                    Rectangle()
+                                                        .stroke(Color(red: 0.7, green: 0.5, blue: 0.2), lineWidth: 8)
+                                                        .overlay(
+                                                            Rectangle()
+                                                                .stroke(Color(red: 0.8, green: 0.7, blue: 0.3), lineWidth: 3)
+                                                                .padding(4)
+                                                        )
+                                                case .floating:
+                                                    Rectangle()
+                                                        .inset(by: -10)
+                                                        .stroke(Color.white.opacity(0.7), lineWidth: 1)
+                                                        .shadow(color: .white.opacity(0.3), radius: 10)
+                                                default:
+                                                    EmptyView()
+                                                }
+                                            }
+                                            .frame(width: width, height: height)
+                                        }
+                                    }
+                                }
+                        case .failure:
+                            Image(systemName: "exclamationmark.triangle.fill")
+                                .font(.system(size: 50))
+                                .foregroundColor(.yellow)
+                                .onAppear {
+                                    isLoading = false
+                                }
+                        @unknown default:
+                            EmptyView()
                         }
                     }
-                    .gesture(
-                        DragGesture()
-                            .onChanged { value in
-                                // Convert drag to 3D offset
-                                let dragX = Float(value.translation.width) / 500.0
-                                let dragY = Float(-value.translation.height) / 500.0
-                                offset = SIMD3<Float>(dragX, dragY, 0)
-                            }
-                    )
+                    .frame(minWidth: 300, minHeight: 300, maxHeight: 600)
+                    .padding()
                     .gesture(
                         MagnificationGesture()
                             .onChanged { value in
@@ -155,12 +165,7 @@ struct ImmersiveArtworkView: View {
                                 rotation = value
                             }
                     )
-                    
-                    // Loading indicator
-                    if isLoading {
-                        ProgressView()
-                            .scaleEffect(2.0)
-                    }
+                    .contentShape(Rectangle())
                 }
                 
                 // Controls

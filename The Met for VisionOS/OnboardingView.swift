@@ -71,36 +71,29 @@ struct OnboardingView: View {
             }
             
             // Main content
-            VStack(spacing: 40) {
-                Spacer().frame(height: 60)
+            VStack(spacing: 20) {
+                Spacer().frame(height: 30)
                 
-                // 3D visual elements
+                // 2D visual elements - replacing 3D models
                 ZStack {
-                    // 3D model placeholder - would be replaced with actual Reality Composer Pro models
-                    RealityView { content in
-                        // Create a dynamic 3D model based on current page
-                        let modelEntity = createModel(for: pages[currentPage].modelName)
-                        
-                        // Add to content
-                        content.add(modelEntity)
-                    } update: { content in
-                        // Update model when page changes
-                        guard let modelEntity = content.entities.first else { return }
-                        
-                        // Update model appearance based on current page
-                        updateModel(modelEntity, for: pages[currentPage].modelName)
-                    }
-                    .frame(width: 300, height: 300)
-                    .scaleEffect(scaleAnimation)
-                    .rotation3DEffect(.degrees(rotationAngle), axis: (x: 0, y: 1, z: 0.2))
-                    .offset(y: floatAnimation ? -10 : 10)
+                    Circle()
+                        .fill(pages[currentPage].color.opacity(0.2))
+                        .frame(width: 240, height: 240)
+                    
+                    Circle()
+                        .fill(pages[currentPage].color.opacity(0.4))
+                        .frame(width: 200, height: 200)
+                    
+                    Image(systemName: pages[currentPage].imageName)
+                        .font(.system(size: 80))
+                        .foregroundStyle(.white)
+                        .symbolEffect(.pulse, options: .repeating)
+                        .scaleEffect(scaleAnimation)
+                        .offset(y: floatAnimation ? -5 : 5)
                 }
-                .frame(height: 320)
-                .padding(.vertical, 20)
+                .frame(height: 250)
+                .padding(.vertical, 10)
                 .onAppear {
-                    withAnimation(.linear(duration: 10).repeatForever(autoreverses: false)) {
-                        rotationAngle = 360
-                    }
                     withAnimation(.easeInOut(duration: 3).repeatForever(autoreverses: true)) {
                         floatAnimation = true
                     }
@@ -110,33 +103,23 @@ struct OnboardingView: View {
                 }
                 
                 // Title and description with depth
-                VStack(spacing: 25) {
+                VStack(spacing: 15) {
                     Text(pages[currentPage].title)
-                        .font(.system(size: 42, weight: .bold, design: .serif))
-                        .foregroundColor(.white)
+                        .font(.title)
+                        .fontWeight(.bold)
+                        .foregroundStyle(.primary)
+                        .padding(.horizontal)
                         .multilineTextAlignment(.center)
-                        .shadow(color: .black.opacity(0.3), radius: 2, x: 0, y: 2)
-                        .transition(.scale.combined(with: .opacity))
-                        .drawingGroup()
-                        .visualEffect { content, geometryProxy in
-                            content
-                                .offset(z: 20)
-                        }
                     
                     Text(pages[currentPage].description)
-                        .font(.system(size: 22, weight: .medium, design: .serif))
-                        .foregroundColor(.white.opacity(0.9))
+                        .font(.body)
+                        .foregroundStyle(.secondary)
                         .multilineTextAlignment(.center)
                         .frame(maxWidth: 500)
                         .padding(.horizontal)
-                        .transition(.move(edge: .trailing).combined(with: .opacity))
-                        .visualEffect { content, geometryProxy in
-                            content
-                                .offset(z: 10)
-                        }
                 }
                 .padding()
-                .animation(.spring(response: 0.6, dampingFraction: 0.7), value: currentPage)
+                .frame(maxHeight: 160)
                 
                 Spacer()
                 

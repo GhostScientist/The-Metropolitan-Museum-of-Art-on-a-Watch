@@ -47,8 +47,7 @@ struct The_Met_for_VisionOSApp: App {
         .windowStyle(.volumetric)
         .defaultSize(width: 800, height: 600, depth: 200)
 
-
-        ImmersiveSpace(id: appModel.immersiveSpaceID) {
+        WindowGroup(id: appModel.immersiveSpaceID) {
             MetGalleryImmersiveView()
                 .environment(appModel)
                 .onAppear {
@@ -58,6 +57,7 @@ struct The_Met_for_VisionOSApp: App {
                     appModel.immersiveSpaceState = .closed
                 }
         }
-        .immersionStyle(selection: .constant(.mixed), in: .mixed)
-     }
+        .windowStyle(.plain)
+        .defaultSize(width: 800, height: 600)
+    }
 }

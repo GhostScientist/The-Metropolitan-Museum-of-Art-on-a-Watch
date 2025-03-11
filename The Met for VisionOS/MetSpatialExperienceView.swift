@@ -47,7 +47,7 @@ struct MetSpatialExperienceView: View {
                             toggleImmersiveSpace()
                         } label: {
                             Label(
-                                appModel.immersiveSpaceState == .open ? "Exit Gallery" : "Enter Gallery",
+                                appModel.immersiveSpaceState == .open ? "Close Gallery" : "Open Gallery",
                                 systemImage: appModel.immersiveSpaceState == .open ? "rectangle.portrait.and.arrow.right" : "building.columns.fill"
                             )
                         }
@@ -220,17 +220,11 @@ struct DepartmentCard: View {
                     )
                     .frame(height: 120)
                 
-                // 3D icon
-                RealityView { content in
-                    // Create a simple 3D model for the department
-                    let mesh = MeshResource.generateSphere(radius: 0.05)
-                    let material = SimpleMaterial(color: .white, roughness: 0.2, isMetallic: true)
-                    let entity = ModelEntity(mesh: mesh, materials: [material])
-                    
-                    // Add to content
-                    content.add(entity)
-                }
-                .frame(width: 80, height: 80)
+                // Replace 3D model with a 2D icon
+                Image(systemName: departmentIcon(for: department))
+                    .font(.system(size: 40))
+                    .foregroundColor(.white)
+                    .shadow(radius: 2)
             }
             
             // Department name
@@ -245,6 +239,36 @@ struct DepartmentCard: View {
         .clipShape(RoundedRectangle(cornerRadius: 20))
         .rotation3DEffect(.degrees(rotationAngle), axis: (x: 0, y: 1, z: 0))
         .shadow(radius: 5)
+    }
+    
+    // Helper function to get appropriate icon for each department
+    private func departmentIcon(for department: Department) -> String {
+        // Map department names to SF Symbols
+        let name = department.displayName.lowercased()
+        
+        if name.contains("painting") || name.contains("drawing") {
+            return "paintpalette.fill"
+        } else if name.contains("photo") {
+            return "camera.fill"
+        } else if name.contains("sculpt") {
+            return "person.bust.fill"
+        } else if name.contains("asian") {
+            return "building.columns.circle.fill"
+        } else if name.contains("egypt") {
+            return "pyramid.fill"
+        } else if name.contains("armor") || name.contains("weapon") {
+            return "shield.fill"
+        } else if name.contains("american") {
+            return "flag.fill"
+        } else if name.contains("islamic") {
+            return "moon.stars.fill"
+        } else if name.contains("instrument") || name.contains("music") {
+            return "music.note"
+        } else if name.contains("fashion") || name.contains("textile") || name.contains("costume") {
+            return "tshirt.fill"
+        } else {
+            return "building.2.fill"
+        }
     }
 }
 

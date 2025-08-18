@@ -124,59 +124,51 @@ struct DepartmentGridCard: View {
             VStack(spacing: 0) {
                 // Department image background
                 ZStack {
-                    // Background image based on department
-                    if let imageName = departmentImageName {
-                        Image(imageName)
+                    // Department image from Assets (same as watchOS)
+                    GeometryReader { geometry in
+                        Image(departmentImageName)
                             .resizable()
                             .aspectRatio(contentMode: .fill)
-                            .frame(height: 320)
-                            .clipShape(RoundedRectangle(cornerRadius: 24, style: .continuous))
-                            .overlay {
-                                // Dark overlay for better text readability
-                                RoundedRectangle(cornerRadius: 24, style: .continuous)
-                                    .fill(.black.opacity(0.4))
-                            }
-                    } else {
-                        // Fallback gradient background
-                        LinearGradient(
-                            colors: departmentGradientColors,
-                            startPoint: .topLeading,
-                            endPoint: .bottomTrailing
-                        )
-                        .frame(height: 320)
-                        .clipShape(RoundedRectangle(cornerRadius: 24, style: .continuous))
+                            .frame(
+                                width: geometry.size.width,
+                                height: geometry.size.height
+                            )
+                            .clipped()
                     }
+                    .clipShape(RoundedRectangle(cornerRadius: 24, style: .continuous))
+                        .overlay {
+                            // Dark overlay for better text readability
+                            RoundedRectangle(cornerRadius: 24, style: .continuous)
+                                .fill(.black.opacity(0.3))
+                        }
                     
-                    // Department icon and info overlay
-                    VStack(spacing: 20) {
+                    // Department info overlay
+                    VStack {
                         Spacer()
-                        
-                        Image(systemName: departmentIcon)
-                            .font(.system(size: 60))
-                            .foregroundStyle(.white)
-                            .shadow(color: .black.opacity(0.6), radius: 3)
                         
                         VStack(spacing: 12) {
                             Text(department.displayName)
-                                .font(.title)
+                                .font(.largeTitle)
                                 .fontWeight(.bold)
                                 .multilineTextAlignment(.center)
                                 .lineLimit(4)
                                 .foregroundStyle(.white)
-                                .shadow(color: .black.opacity(0.8), radius: 3)
+                                .shadow(color: .black.opacity(0.8), radius: 4)
                             
                             Text("Explore Collection")
-                                .font(.subheadline)
+                                .font(.title3)
+                                .fontWeight(.medium)
                                 .foregroundStyle(.white.opacity(0.9))
                                 .shadow(color: .black.opacity(0.6), radius: 2)
                         }
                         
-                        Spacer()
+                        Spacer(minLength: 30)
                     }
                     .padding(30)
                 }
             }
-            .frame(height: 320)
+            .frame(maxWidth: .infinity, maxHeight: 320)
+            .clipped()
         }
         .buttonStyle(.plain)
         .scaleEffect(scale)
@@ -201,100 +193,39 @@ struct DepartmentGridCard: View {
         .animation(.spring(response: 0.4, dampingFraction: 0.8), value: appModel.selectedDepartment?.departmentId)
     }
     
-    private var departmentImageName: String? {
-        // Map department ID to image names from your watchOS app
-        switch department.departmentId {
-        case 1: return "1"    // The American Wing
-        case 3: return "3"    // Ancient Near Eastern Art
-        case 4: return "4"    // Arms and Armor
-        case 5: return "5"    // Arts of Africa, Oceania, and the Americas
-        case 6: return "6"    // Asian Art
-        case 7: return "7"    // The Cloisters
-        case 8: return "8"    // The Costume Institute
-        case 9: return "9"    // Drawings and Prints
-        case 10: return "10"  // Egyptian Art
-        case 11: return "11"  // European Paintings
-        case 12: return "12"  // European Sculpture and Decorative Arts
-        case 13: return "13"  // Greek and Roman Art
-        case 14: return "14"  // Islamic Art
-        case 15: return "15"  // The Robert Lehman Collection
-        case 16: return "16"  // The Libraries
-        case 17: return "17"  // Medieval Art
-        case 18: return "18"  // Musical Instruments
-        case 19: return "19"  // Photographs
-        case 20: return "20"  // Modern Art
-        default: return nil
-        }
-    }
-    
-    private var departmentGradientColors: [Color] {
-        let name = department.displayName.lowercased()
-        
-        switch name {
-        case let n where n.contains("american"):
-            return [.red, .blue]
-        case let n where n.contains("european"):
-            return [.purple, .blue]
-        case let n where n.contains("asian"):
-            return [.orange, .red]
-        case let n where n.contains("egyptian"):
-            return [.yellow, .orange]
-        case let n where n.contains("greek") || n.contains("roman"):
-            return [.blue, .cyan]
-        case let n where n.contains("islamic"):
-            return [.teal, .green]
-        case let n where n.contains("medieval"):
-            return [.purple, .indigo]
-        case let n where n.contains("modern"):
-            return [.pink, .purple]
-        case let n where n.contains("costume") || n.contains("fashion"):
-            return [.pink, .red]
-        case let n where n.contains("arms") || n.contains("armor"):
-            return [.gray, .black]
-        default:
-            return [.blue, .purple]
-        }
-    }
-    
-    private var departmentIcon: String {
-        let name = department.displayName.lowercased()
-        
-        switch name {
-        case let n where n.contains("american"):
-            return "flag.fill"
-        case let n where n.contains("european"):
-            return "building.columns.fill"
-        case let n where n.contains("asian"):
-            return "building.2.fill"
-        case let n where n.contains("egyptian"):
-            return "pyramid"
-        case let n where n.contains("greek") || n.contains("roman"):
-            return "building.columns"
-        case let n where n.contains("islamic"):
-            return "moon.stars.fill"
-        case let n where n.contains("medieval"):
-            return "crown.fill"
-        case let n where n.contains("modern"):
-            return "square.stack.3d.up.fill"
-        case let n where n.contains("contemporary"):
-            return "paintbrush.pointed.fill"
-        case let n where n.contains("arms") || n.contains("armor"):
-            return "shield.fill"
-        case let n where n.contains("costume") || n.contains("fashion"):
-            return "tshirt.fill"
-        case let n where n.contains("musical"):
-            return "music.note"
-        case let n where n.contains("photograph"):
-            return "camera.fill"
-        case let n where n.contains("print") || n.contains("drawing"):
-            return "pencil.and.outline"
-        default:
-            return "building.columns.fill"
-        }
+    private var departmentImageName: String {
+        // Use Asset images named after department ID (same as watchOS)
+        return "\(department.departmentId)"
     }
     
     private var departmentGlowColor: Color {
-        departmentGradientColors.first ?? .blue
+        // Use a sophisticated glow based on department theme
+        let name = department.displayName.lowercased()
+        
+        switch name {
+        case let n where n.contains("american"):
+            return .blue
+        case let n where n.contains("european"):
+            return .purple
+        case let n where n.contains("asian"):
+            return .orange
+        case let n where n.contains("egyptian"):
+            return .yellow
+        case let n where n.contains("greek") || n.contains("roman"):
+            return .cyan
+        case let n where n.contains("islamic"):
+            return .teal
+        case let n where n.contains("medieval"):
+            return .indigo
+        case let n where n.contains("modern"):
+            return .pink
+        case let n where n.contains("costume") || n.contains("fashion"):
+            return .red
+        case let n where n.contains("arms") || n.contains("armor"):
+            return .gray
+        default:
+            return .blue
+        }
     }
 }
 

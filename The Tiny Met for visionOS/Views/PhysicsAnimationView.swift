@@ -97,42 +97,21 @@ struct MagneticFieldEffect: ViewModifier {
     func body(content: Content) -> some View {
         content
             .offset(magneticOffset)
-            .background {
-                // Invisible magnetic field detector
-                Rectangle()
-                    .fill(.clear)
-                    .frame(width: 400, height: 400)
-                    .onContinuousHover { phase in
-                        switch phase {
-                        case .active(let location):
-                            let centerX: CGFloat = 200
-                            let centerY: CGFloat = 200
-                            
-                            let deltaX = location.x - centerX
-                            let deltaY = location.y - centerY
-                            let distance = sqrt(deltaX * deltaX + deltaY * deltaY)
-                            
-                            if distance < 150 {
-                                let strength = (150 - distance) / 150
-                                let attraction = strength * 15
-                                
-                                withAnimation(.interactiveSpring(response: 0.4, dampingFraction: 0.6)) {
-                                    magneticOffset = CGSize(
-                                        width: (deltaX / distance) * attraction,
-                                        height: (deltaY / distance) * attraction
-                                    )
-                                    magneticStrength = strength
-                                }
-                            }
-                        case .ended:
-                            withAnimation(.spring(response: 0.8, dampingFraction: 0.7)) {
-                                magneticOffset = .zero
-                                magneticStrength = 0
-                            }
-                        }
+            .scaleEffect(1 + magneticStrength * 0.05)
+            .onHover { hovering in
+                withAnimation(.spring(response: 0.6, dampingFraction: 0.8)) {
+                    if hovering {
+                        magneticOffset = CGSize(
+                            width: CGFloat.random(in: -2...2),
+                            height: CGFloat.random(in: -2...2)
+                        )
+                        magneticStrength = 0.03
+                    } else {
+                        magneticOffset = .zero
+                        magneticStrength = 0
                     }
+                }
             }
-            .scaleEffect(1 + magneticStrength * 0.1)
     }
 }
 

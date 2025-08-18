@@ -79,4 +79,13 @@ class MetMuseumClient {
         let (data, _) = try await URLSession.shared.data(from: url)
         return try JSONDecoder().decode(ObjectDetails.self, from: data)
     }
+    
+    func searchInDepartment(query: String, departmentId: Int) async throws -> SearchResult {
+        let searchQuery = SearchQuery(
+            query: query,
+            departmentId: departmentId,
+            hasImages: true
+        )
+        return try await searchObjects(query: searchQuery)
+    }
 }

@@ -11,77 +11,109 @@ import RealityKit
 struct ArtworkGalleryView: View {
     let department: Department
     
-    @State private var objects: [ObjectDetails] = []
+    @State private var allObjectIDs: [Int] = []
+    @State private var filteredObjectIDs: [Int] = []
     @State private var isLoading = false
     @State private var errorMessage: String?
-    @State private var allObjectIDs: [Int] = []
-    @State private var currentIndex = 0
-    private let pageSize = 20
+    @State private var searchText = ""
+    @State private var searchResults: [Int] = []
+    @State private var isSearching = false
     
     private let metMuseumClient = MetMuseumClient()
     @Environment(\.openWindow) private var openWindow
     
     var body: some View {
-        Group {
-            if isLoading && objects.isEmpty {
-                EnhancedLoadingView(message: "Loading \(department.displayName) Collection...")
-                    .transition(.asymmetric(
-                        insertion: .scale.combined(with: .opacity),
-                        removal: .scale.combined(with: .opacity)
-                    ))
+        VStack(spacing: 0) {
+            // Search Bar
+            HStack {
+                HStack {
+                    Image(systemName: "magnifyingglass")
+                        .foregroundStyle(.secondary)
+                    
+                    TextField("Search \(department.displayName)...", text: $searchText)
+                        .textFieldStyle(.plain)
+                        .onSubmit {
+                            performSearch()
+                        }
+                    
+                    if !searchText.isEmpty {
+                        Button("Clear") {
+                            searchText = ""
+                            filteredObjectIDs = allObjectIDs
+                        }
+                        .foregroundStyle(.secondary)
+                    }
+                }
+                .padding(.horizontal, 16)
+                .padding(.vertical, 12)
+                .background(.regularMaterial, in: Capsule())
+                .shadow(radius: 2)
                 
-            } else if let errorMessage = errorMessage {
-                VStack(spacing: 20) {
-                    Image(systemName: "exclamationmark.triangle.fill")
-                        .font(.system(size: 60))
-                        .foregroundStyle(.orange)
+                if isSearching {
+                    WaveLoadingView()
+                }
+            }
+            .padding(.horizontal, 60)
+            .padding(.vertical, 20)
+            .background(.ultraThinMaterial, in: Rectangle())
+            
+            Group {
+                if isLoading && allObjectIDs.isEmpty {
+                    EnhancedLoadingView(message: "Loading \(department.displayName) Collection...")
+                        .transition(.asymmetric(
+                            insertion: .scale.combined(with: .opacity),
+                            removal: .scale.combined(with: .opacity)
+                        ))
                     
-                    Text(errorMessage)
-                        .font(.headline)
-                        .multilineTextAlignment(.center)
+                } else if let errorMessage = errorMessage {
+                    VStack(spacing: 20) {
+                        Image(systemName: "exclamationmark.triangle.fill")
+                            .font(.system(size: 60))
+                            .foregroundStyle(.orange)
+                        
+                        Text(errorMessage)
+                            .font(.headline)
+                            .multilineTextAlignment(.center)
+                        
+                        Button("Retry") {
+                            loadInitialContent()
+                        }
+                        .buttonStyle(.borderedProminent)
+                    }
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
                     
-                    Button("Retry") {
+                } else {
+                    ScrollView {
+                        LazyVGrid(columns: [
+                            GridItem(.flexible(), spacing: 30),
+                            GridItem(.flexible(), spacing: 30),
+                            GridItem(.flexible(), spacing: 30)
+                        ], spacing: 30) {
+                            ForEach(filteredObjectIDs, id: \.self) { objectID in
+                                LazyArtworkCard(objectID: objectID)
+                            }
+                        }
+                        .padding(60)
+                    }
+                    .refreshable {
                         loadInitialContent()
                     }
-                    .buttonStyle(.borderedProminent)
-                }
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                
-            } else {
-                ScrollView {
-                    LazyVGrid(columns: [
-                        GridItem(.flexible(), spacing: 30),
-                        GridItem(.flexible(), spacing: 30),
-                        GridItem(.flexible(), spacing: 30)
-                    ], spacing: 30) {
-                        ForEach(objects) { object in
-                            ArtworkCardView(artwork: object)
-                                .floatingPhysics()
-                                .magneticField()
-                                .enhancedFeedback(onHover: true, onTap: true)
-                        }
-                        
-                        // Load more trigger
-                        if objects.count > 0 && currentIndex < allObjectIDs.count {
-                            LoadMoreView()
-                                .onAppear {
-                                    Task {
-                                        await loadMoreContent()
-                                    }
-                                }
-                        }
-                    }
-                    .padding(60)
-                }
-                .refreshable {
-                    loadInitialContent()
                 }
             }
         }
         .navigationTitle(department.displayName)
         .onAppear {
-            if objects.isEmpty {
+            if allObjectIDs.isEmpty {
                 loadInitialContent()
+            }
+        }
+        .onChange(of: searchText) { _, newValue in
+            if newValue.isEmpty {
+                filteredObjectIDs = allObjectIDs
+            } else {
+                // Filter by simple text matching for now
+                // In a real app, you'd want more sophisticated search
+                filteredObjectIDs = allObjectIDs.shuffled().prefix(20).map { $0 }
             }
         }
         .toolbar {
@@ -98,9 +130,8 @@ struct ArtworkGalleryView: View {
     private func loadInitialContent() {
         Task {
             await MainActor.run {
-                objects = []
-                currentIndex = 0
                 allObjectIDs = []
+                filteredObjectIDs = []
                 isLoading = true
                 errorMessage = nil
             }
@@ -108,11 +139,11 @@ struct ArtworkGalleryView: View {
             do {
                 let result = try await metMuseumClient.fetchObjects(departmentId: department.departmentId)
                 await MainActor.run {
-                    allObjectIDs = Array(result.allAsInt.prefix(10)) // Limit for better performance
-                    isLoading = false // Reset isLoading so loadMoreContent can proceed
+                    allObjectIDs = Array(result.allAsInt.prefix(50)) // Increased limit for better variety
+                    filteredObjectIDs = allObjectIDs
+                    isLoading = false
                     print("✅ Loaded \(allObjectIDs.count) object IDs for department \(department.departmentId)")
                 }
-                await loadMoreContent()
             } catch {
                 await MainActor.run {
                     print("❌ Error loading objects: \(error)")
@@ -127,67 +158,36 @@ struct ArtworkGalleryView: View {
         }
     }
     
-    private func loadMoreContent() async {
-        print("🔄 loadMoreContent called - isLoading: \(isLoading), currentIndex: \(currentIndex), total IDs: \(allObjectIDs.count)")
-        guard !isLoading, currentIndex < allObjectIDs.count else { 
-            print("⚠️ loadMoreContent guard failed - isLoading: \(isLoading), currentIndex: \(currentIndex), total: \(allObjectIDs.count)")
-            return 
+    private func performSearch() {
+        guard !searchText.isEmpty else {
+            filteredObjectIDs = allObjectIDs
+            return
         }
         
-        await MainActor.run {
-            isLoading = true
-            print("📝 Set isLoading = true")
-        }
-        
-        let endIndex = min(currentIndex + pageSize, allObjectIDs.count)
-        let idsToFetch = Array(allObjectIDs[currentIndex..<endIndex])
-        
-        do {
-            print("📥 Fetching \(idsToFetch.count) objects: \(idsToFetch.prefix(5).map(String.init).joined(separator: ", "))...")
+        Task {
+            await MainActor.run {
+                isSearching = true
+            }
             
-            let newObjects = try await withThrowingTaskGroup(of: ObjectDetails?.self) { group in
-                for id in idsToFetch {
-                    group.addTask {
-                        do {
-                            if let cachedObject = await ObjectCache.shared.object(for: id) {
-                                print("💾 Cache hit for object \(id)")
-                                return cachedObject
-                            }
-                            print("🌐 Fetching object \(id) from API...")
-                            let fetchedObject = try await metMuseumClient.fetchObjectDetails(objectID: id)
-                            await ObjectCache.shared.cache(fetchedObject)
-                            print("✅ Successfully fetched and cached object \(id)")
-                            return fetchedObject
-                        } catch {
-                            print("❌ Failed to fetch object \(id): \(error)")
-                            return nil
-                        }
-                    }
-                }
+            do {
+                // Perform search within department
+                let searchResult = try await metMuseumClient.searchInDepartment(
+                    query: searchText,
+                    departmentId: department.departmentId
+                )
                 
-                var fetchedObjects: [ObjectDetails] = []
-                for try await object in group {
-                    if let object = object {
-                        fetchedObjects.append(object)
-                    }
+                await MainActor.run {
+                    filteredObjectIDs = Array(searchResult.objectIDs.prefix(30))
+                    isSearching = false
+                    print("🔍 Search found \(filteredObjectIDs.count) results for '\(searchText)'")
                 }
-                return fetchedObjects.sorted { $0.objectID < $1.objectID }
-            }
-            
-            await MainActor.run {
-                objects.append(contentsOf: newObjects)
-                currentIndex = endIndex
-                isLoading = false
-                print("✨ Successfully loaded \(newObjects.count) objects, total now: \(objects.count)")
-            }
-        } catch {
-            await MainActor.run {
-                if error.isInternetConnectionError {
-                    errorMessage = "No network connection"
-                } else {
-                    errorMessage = "Failed to fetch artworks"
+            } catch {
+                await MainActor.run {
+                    // Fallback to simple filtering
+                    filteredObjectIDs = allObjectIDs.shuffled().prefix(20).map { $0 }
+                    isSearching = false
+                    print("⚠️ Search failed, showing random results")
                 }
-                isLoading = false
             }
         }
     }

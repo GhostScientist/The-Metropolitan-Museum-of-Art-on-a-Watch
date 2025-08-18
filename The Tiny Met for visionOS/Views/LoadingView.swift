@@ -64,10 +64,10 @@ struct EnhancedLoadingView: View {
 
 struct ShimmerLoadingView: View {
     @State private var shimmerOffset: CGFloat = -300
-    let width: CGFloat
+    let width: CGFloat?
     let height: CGFloat
     
-    init(width: CGFloat = 280, height: CGFloat = 200) {
+    init(width: CGFloat? = 280, height: CGFloat = 200) {
         self.width = width
         self.height = height
     }
@@ -76,6 +76,7 @@ struct ShimmerLoadingView: View {
         RoundedRectangle(cornerRadius: 16, style: .continuous)
             .fill(.quaternary)
             .frame(width: width, height: height)
+            .frame(maxWidth: width == nil ? .infinity : width)
             .overlay {
                 RoundedRectangle(cornerRadius: 16, style: .continuous)
                     .fill(
@@ -97,7 +98,7 @@ struct ShimmerLoadingView: View {
                     )
             }
             .onAppear {
-                shimmerOffset = width + 100
+                shimmerOffset = (width ?? 300) + 100
             }
     }
 }

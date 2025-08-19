@@ -95,7 +95,10 @@ struct ObjectDetailView: View {
                             VStack {
                                 Button {
                                     guard let url = URL(string: objectDetails.objectURL) else { return }
-                                    let session = ASWebAuthenticationSession(url: url, callbackURLScheme: "") { _,_ in
+                                    let session = ASWebAuthenticationSession(url: url, callbackURLScheme: nil) { _, error in
+                                        if let error = error {
+                                            print("ASWebAuthenticationSession error: \(error)")
+                                        }
                                     }
                                     session.prefersEphemeralWebBrowserSession = true
                                     session.start()

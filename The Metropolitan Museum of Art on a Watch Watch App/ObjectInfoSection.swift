@@ -10,13 +10,13 @@ import SwiftUI
 struct ObjectInfoSection: View {
     let title: String
     let content: String
-    
+
     var body: some View {
         VStack(alignment: .leading) {
             Text("\(title):")
                 .fontWeight(.bold)
             Text(content)
-                .foregroundColor(.secondary)
+                .foregroundStyle(.secondary)
         }
         .font(.subheadline)
     }

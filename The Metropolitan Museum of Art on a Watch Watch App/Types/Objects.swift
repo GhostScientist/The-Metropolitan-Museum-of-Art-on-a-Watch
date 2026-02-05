@@ -7,26 +7,24 @@
 
 import Foundation
 
-struct ObjectIDs: Codable {
+struct ObjectIDs: Codable, Sendable {
     let total: Int
     let objectIDs: [Int]
-    
+
     var firstTen: [Int] {
         return Array(objectIDs.prefix(10))
     }
-    
+
     var allAsInt: [Int] {
         return Array(objectIDs)
     }
 }
 
-import Foundation
-
-struct ObjectDetails: Codable, Identifiable, Hashable {
-    var id: Int{
+struct ObjectDetails: Codable, Identifiable, Hashable, Sendable {
+    var id: Int {
         return objectID
     }
-    
+
     let objectID: Int
     let isHighlight: Bool
     let accessionYear: String

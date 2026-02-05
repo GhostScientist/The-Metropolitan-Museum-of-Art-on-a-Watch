@@ -7,12 +7,12 @@
 
 import Foundation
 
-struct SearchResult: Codable {
+struct SearchResult: Codable, Sendable {
     let total: Int
     let objectIDs: [Int]
 }
 
-struct SearchQuery {
+struct SearchQuery: Sendable {
     var query: String
     var isHighlight: Bool?
     var title: Bool?
@@ -25,7 +25,7 @@ struct SearchQuery {
     var geoLocation: String?
     var dateBegin: Int?
     var dateEnd: Int?
-    
+
     init(query: String) {
         self.query = query
     }

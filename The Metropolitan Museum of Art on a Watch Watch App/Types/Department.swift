@@ -7,11 +7,11 @@
 
 import Foundation
 
-struct DepartmentResponse: Codable {
+struct DepartmentResponse: Codable, Sendable {
     let departments: [Department]
 }
 
-struct Department: Codable {
+struct Department: Codable, Sendable {
     let departmentId: Int
     let displayName: String
 }

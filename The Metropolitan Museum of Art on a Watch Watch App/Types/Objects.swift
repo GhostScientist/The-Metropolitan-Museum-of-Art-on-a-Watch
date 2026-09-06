@@ -7,9 +7,20 @@
 
 import Foundation
 
-struct ObjectIDs: Codable {
+struct ObjectIDs: Codable, Sendable {
     let total: Int
     let objectIDs: [Int]
+
+    init(total: Int, objectIDs: [Int]) {
+        self.total = total
+        self.objectIDs = objectIDs
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        total = try container.decode(Int.self, forKey: .total)
+        objectIDs = try container.decodeIfPresent([Int].self, forKey: .objectIDs) ?? []
+    }
     
     var firstTen: [Int] {
         return Array(objectIDs.prefix(10))
@@ -20,9 +31,7 @@ struct ObjectIDs: Codable {
     }
 }
 
-import Foundation
-
-struct ObjectDetails: Codable, Identifiable, Hashable {
+struct ObjectDetails: Codable, Identifiable, Hashable, Sendable {
     var id: Int{
         return objectID
     }

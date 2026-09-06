@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A10000000000000000000001 /* DepartmentBrowser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000000000000000000001 /* DepartmentBrowser.swift */; };
+		A10000000000000000000002 /* ArtworkImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000000000000000000002 /* ArtworkImageCache.swift */; };
+		A10000000000000000000003 /* FavoritesStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000000000000000000003 /* FavoritesStore.swift */; };
+		A10000000000000000000004 /* ArtworkImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000000000000000000004 /* ArtworkImageView.swift */; };
+		A10000000000000000000005 /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000000000000000000005 /* FavoritesView.swift */; };
 		D347A15E2CD0869100977486 /* OnFirstAppearModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D347A15D2CD0869100977486 /* OnFirstAppearModifier.swift */; };
 		D347A1602CD086F400977486 /* CachedObjectDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = D347A15F2CD086F400977486 /* CachedObjectDetails.swift */; };
 		D347A1622CD0871000977486 /* Object.swift in Sources */ = {isa = PBXBuildFile; fileRef = D347A1612CD0871000977486 /* Object.swift */; };
@@ -51,6 +56,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		A20000000000000000000001 /* DepartmentBrowser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models/DepartmentBrowser.swift; sourceTree = "<group>"; };
+		A20000000000000000000002 /* ArtworkImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtworkImageCache.swift; sourceTree = "<group>"; };
+		A20000000000000000000003 /* FavoritesStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesStore.swift; sourceTree = "<group>"; };
+		A20000000000000000000004 /* ArtworkImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtworkImageView.swift; sourceTree = "<group>"; };
+		A20000000000000000000005 /* FavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesView.swift; sourceTree = "<group>"; };
 		D347A15D2CD0869100977486 /* OnFirstAppearModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnFirstAppearModifier.swift; sourceTree = "<group>"; };
 		D347A15F2CD086F400977486 /* CachedObjectDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachedObjectDetails.swift; sourceTree = "<group>"; };
 		D347A1612CD0871000977486 /* Object.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Object.swift; sourceTree = "<group>"; };
@@ -85,6 +95,8 @@
 		D347A15C2CD0868200977486 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				A20000000000000000000002 /* ArtworkImageCache.swift */,
+				A20000000000000000000003 /* FavoritesStore.swift */,
 				D347A15F2CD086F400977486 /* CachedObjectDetails.swift */,
 				D347A15D2CD0869100977486 /* OnFirstAppearModifier.swift */,
 			);
@@ -111,6 +123,9 @@
 		D3DA100E2BBB9307003ADB02 /* The Metropolitan Museum of Art on a Watch Watch App */ = {
 			isa = PBXGroup;
 			children = (
+				A20000000000000000000001 /* DepartmentBrowser.swift */,
+				A20000000000000000000004 /* ArtworkImageView.swift */,
+				A20000000000000000000005 /* FavoritesView.swift */,
 				D347A15C2CD0868200977486 /* Helpers */,
 				D3DA10222BBB9341003ADB02 /* API */,
 				D3DA10212BBB933E003ADB02 /* Types */,
@@ -252,6 +267,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A10000000000000000000001 /* DepartmentBrowser.swift in Sources */,
+				A10000000000000000000002 /* ArtworkImageCache.swift in Sources */,
+				A10000000000000000000003 /* FavoritesStore.swift in Sources */,
+				A10000000000000000000004 /* ArtworkImageView.swift in Sources */,
+				A10000000000000000000005 /* FavoritesView.swift in Sources */,
 				D3DA10122BBB9307003ADB02 /* ContentView.swift in Sources */,
 				D347A1642CD0875200977486 /* ImageInspectView.swift in Sources */,
 				D3DA10242BBB9349003ADB02 /* TheMetMuseumAPI.swift in Sources */,

@@ -7,9 +7,20 @@
 
 import Foundation
 
-struct SearchResult: Codable {
+struct SearchResult: Codable, Sendable {
     let total: Int
     let objectIDs: [Int]
+
+    init(total: Int, objectIDs: [Int]) {
+        self.total = total
+        self.objectIDs = objectIDs
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        total = try container.decode(Int.self, forKey: .total)
+        objectIDs = try container.decodeIfPresent([Int].self, forKey: .objectIDs) ?? []
+    }
 }
 
 struct SearchQuery {

@@ -29,7 +29,8 @@ final class FavoritesStore {
 
     nonisolated static var defaultFileURL: URL {
         let base = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first
-            ?? FileManager.default.homeDirectoryForCurrentUser.appendingPathComponent("Library/Application Support")
+            ?? URL(fileURLWithPath: NSHomeDirectory(), isDirectory: true)
+                .appendingPathComponent("Library/Application Support")
         return base.appendingPathComponent("TheTinyMet", isDirectory: true)
             .appendingPathComponent("favorites.json")
     }

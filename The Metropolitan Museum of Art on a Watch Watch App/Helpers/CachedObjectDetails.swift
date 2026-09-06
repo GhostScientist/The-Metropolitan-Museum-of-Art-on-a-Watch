@@ -67,7 +67,7 @@ actor ObjectCache {
 enum CacheStorage {
     static func directory(named name: String) -> URL {
         let base = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first
-            ?? FileManager.default.homeDirectoryForCurrentUser.appendingPathComponent("Library/Caches")
+            ?? URL(fileURLWithPath: NSHomeDirectory(), isDirectory: true).appendingPathComponent("Library/Caches")
         return base.appendingPathComponent("TheTinyMet", isDirectory: true)
             .appendingPathComponent(name, isDirectory: true)
     }

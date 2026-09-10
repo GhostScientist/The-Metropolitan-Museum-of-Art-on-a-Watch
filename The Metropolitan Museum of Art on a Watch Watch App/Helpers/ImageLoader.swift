@@ -88,6 +88,46 @@ actor ImageLoader {
     }
 }
 
+extension ImageLoader {
+    /// Renders `image` scaled to fill `pointSize` at `scale`, centre-cropped,
+    /// as a bitmap of exactly that size.
+    ///
+    /// WidgetKit refuses to archive an image whose pixel area is much larger
+    /// than the widget that displays it (`ArchivingError.imageTooLarge`), so
+    /// complication artwork is rendered to the widget's own display size
+    /// rather than handed over as a general-purpose thumbnail.
+    nonisolated static func cover(_ image: UIImage, pointSize: CGSize, scale: CGFloat) -> UIImage? {
+        guard let source = image.cgImage else { return nil }
+        let width = Int((pointSize.width * scale).rounded(.down))
+        let height = Int((pointSize.height * scale).rounded(.down))
+        guard width > 0, height > 0,
+              let colorSpace = CGColorSpace(name: CGColorSpace.sRGB),
+              let context = CGContext(
+                data: nil,
+                width: width,
+                height: height,
+                bitsPerComponent: 8,
+                bytesPerRow: 0,
+                space: colorSpace,
+                bitmapInfo: CGImageAlphaInfo.noneSkipFirst.rawValue | CGBitmapInfo.byteOrder32Little.rawValue
+              )
+        else { return nil }
+
+        context.interpolationQuality = .high
+        let sourceSize = CGSize(width: source.width, height: source.height)
+        let factor = max(CGFloat(width) / sourceSize.width, CGFloat(height) / sourceSize.height)
+        let drawSize = CGSize(width: sourceSize.width * factor, height: sourceSize.height * factor)
+        let origin = CGPoint(
+            x: (CGFloat(width) - drawSize.width) / 2,
+            y: (CGFloat(height) - drawSize.height) / 2
+        )
+        context.draw(source, in: CGRect(origin: origin, size: drawSize))
+
+        guard let output = context.makeImage() else { return nil }
+        return UIImage(cgImage: output, scale: scale, orientation: .up)
+    }
+}
+
 enum RemoteImagePhase: Equatable {
     case loading
     case failure

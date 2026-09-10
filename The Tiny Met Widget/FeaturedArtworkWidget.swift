@@ -23,37 +23,50 @@ struct ArtworkEntry: TimelineEntry, Sendable {
         objectID.flatMap { URL(string: "tinymet://object/\($0)") }
     }
 
-    static let placeholder = ArtworkEntry(
-        date: .now,
-        objectID: 436535,
-        title: "Wheat Field with Cypresses",
-        artistName: "Vincent van Gogh",
-        department: "European Paintings",
-        objectDate: "1889",
-        image: UIImage(named: "PlaceholderArtwork")
-    )
+    /// Van Gogh's Wheat Field with Cypresses, bundled, sized for `displaySize`.
+    static func placeholder(fitting displaySize: CGSize) -> ArtworkEntry {
+        ArtworkEntry(
+            date: .now,
+            objectID: 436535,
+            title: "Wheat Field with Cypresses",
+            artistName: "Vincent van Gogh",
+            department: "European Paintings",
+            objectDate: "1889",
+            image: UIImage(named: "PlaceholderArtwork").flatMap { ArtworkEntry.artwork($0, fitting: displaySize) }
+        )
+    }
+
+    /// WidgetKit rejects images much larger than the widget itself, so the
+    /// artwork is rendered to the widget's display size. 1.8x rather than the
+    /// screen's 2x keeps the pixel area under WidgetKit's limit on every
+    /// watch size while staying sharp.
+    static func artwork(_ image: UIImage, fitting displaySize: CGSize) -> UIImage? {
+        ImageLoader.cover(image, pointSize: displaySize, scale: 1.8)
+    }
 }
 
 struct ArtworkTimelineProvider: TimelineProvider {
     private let client = MetMuseumClient()
 
     func placeholder(in context: Context) -> ArtworkEntry {
-        .placeholder
+        .placeholder(fitting: context.displaySize)
     }
 
     func getSnapshot(in context: Context, completion: @escaping @Sendable (ArtworkEntry) -> Void) {
         if context.isPreview {
-            completion(.placeholder)
+            completion(.placeholder(fitting: context.displaySize))
             return
         }
+        let displaySize = context.displaySize
         Task {
-            completion(await fetchRandomHighlight())
+            completion(await fetchRandomHighlight(fitting: displaySize))
         }
     }
 
     func getTimeline(in context: Context, completion: @escaping @Sendable (Timeline<ArtworkEntry>) -> Void) {
+        let displaySize = context.displaySize
         Task {
-            let entry = await fetchRandomHighlight()
+            let entry = await fetchRandomHighlight(fitting: displaySize)
             let nextUpdate = Calendar.current.date(byAdding: .hour, value: 4, to: entry.date)
                 ?? entry.date.addingTimeInterval(4 * 60 * 60)
             completion(Timeline(entries: [entry], policy: .after(nextUpdate)))
@@ -63,19 +76,20 @@ struct ArtworkTimelineProvider: TimelineProvider {
     /// A random highlighted object that has an image. Only objects whose
     /// image actually downloads are eligible, so the complication never
     /// shows an empty frame.
-    private func fetchRandomHighlight() async -> ArtworkEntry {
+    private func fetchRandomHighlight(fitting displaySize: CGSize) async -> ArtworkEntry {
         var query = SearchQuery(query: "*")
         query.isHighlight = true
         query.hasImages = true
 
         guard let result = try? await client.searchObjects(query: query) else {
-            return .placeholder
+            return .placeholder(fitting: displaySize)
         }
 
         for objectID in result.objectIDs.shuffled().prefix(4) {
             guard let details = try? await client.fetchObjectDetails(objectID: objectID),
                   !details.primaryImageSmall.isEmpty,
-                  let image = await ImageLoader.shared.image(for: details.primaryImageSmall, maxPixelSize: 400)
+                  let source = await ImageLoader.shared.image(for: details.primaryImageSmall, maxPixelSize: 720),
+                  let image = ArtworkEntry.artwork(source, fitting: displaySize)
             else { continue }
 
             return ArtworkEntry(
@@ -88,7 +102,7 @@ struct ArtworkTimelineProvider: TimelineProvider {
                 image: image
             )
         }
-        return .placeholder
+        return .placeholder(fitting: displaySize)
     }
 }
 
@@ -185,5 +199,5 @@ struct FeaturedArtworkWidget: Widget {
 #Preview(as: .accessoryRectangular) {
     FeaturedArtworkWidget()
 } timeline: {
-    ArtworkEntry.placeholder
+    ArtworkEntry.placeholder(fitting: CGSize(width: 194, height: 80.5))
 }

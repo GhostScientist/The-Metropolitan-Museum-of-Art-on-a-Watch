@@ -5,7 +5,7 @@
 //  Created by Dakota Kim on 10/28/24.
 //
 
-import SwiftUI
+import Foundation
 
 extension Error {
     var isInternetConnectionError: Bool {

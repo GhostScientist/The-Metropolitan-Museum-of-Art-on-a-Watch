@@ -7,6 +7,24 @@
       buildImplicitDependencies = "YES"
       buildArchitectures = "Automatic">
       <BuildActionEntries>
+         <!-- The iOS container is the installable product: archiving it
+              produces an App Store archive with the Watch App embedded.
+              The Watch App itself is skip-install, so archiving it alone
+              yields an empty, generic archive. -->
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "D3DA10032BBB9307003ADB02"
+               BuildableName = "The Tiny Met.app"
+               BlueprintName = "The Tiny Met"
+               ReferencedContainer = "container:The Tiny Met.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
          <BuildActionEntry
             buildForTesting = "YES"
             buildForRunning = "YES"

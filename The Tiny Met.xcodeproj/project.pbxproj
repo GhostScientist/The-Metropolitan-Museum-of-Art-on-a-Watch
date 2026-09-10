@@ -603,6 +603,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = ZU78LZES28;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "The Tiny Met Widget/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "The Tiny Met Widget";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -631,6 +632,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = ZU78LZES28;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "The Tiny Met Widget/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "The Tiny Met Widget";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (

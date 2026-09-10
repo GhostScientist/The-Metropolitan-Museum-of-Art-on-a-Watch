@@ -10,9 +10,9 @@ import SwiftUI
 import WidgetKit
 
 struct OpenTheTinyMetIntent: AppIntent {
-    static var title: LocalizedStringResource = "Open The Tiny Met"
-    static var description: IntentDescription = "Opens The Tiny Met app to browse the collection."
-    static var openAppWhenRun: Bool = true
+    static let title: LocalizedStringResource = "Open The Tiny Met"
+    static let description: IntentDescription = "Opens The Tiny Met app to browse the collection."
+    static let openAppWhenRun: Bool = true
 
     func perform() async throws -> some IntentResult {
         return .result()

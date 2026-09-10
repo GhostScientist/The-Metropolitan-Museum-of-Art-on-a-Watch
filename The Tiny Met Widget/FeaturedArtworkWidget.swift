@@ -8,7 +8,7 @@
 import SwiftUI
 import WidgetKit
 
-struct ArtworkEntry: TimelineEntry {
+struct ArtworkEntry: TimelineEntry, Sendable {
     let date: Date
     let title: String
     let artistName: String
@@ -33,7 +33,7 @@ struct ArtworkTimelineProvider: TimelineProvider {
         .placeholder
     }
 
-    func getSnapshot(in context: Context, completion: @escaping (ArtworkEntry) -> Void) {
+    func getSnapshot(in context: Context, completion: @escaping @Sendable (ArtworkEntry) -> Void) {
         if context.isPreview {
             completion(.placeholder)
             return
@@ -44,7 +44,7 @@ struct ArtworkTimelineProvider: TimelineProvider {
         }
     }
 
-    func getTimeline(in context: Context, completion: @escaping (Timeline<ArtworkEntry>) -> Void) {
+    func getTimeline(in context: Context, completion: @escaping @Sendable (Timeline<ArtworkEntry>) -> Void) {
         Task {
             let entry = await fetchRandomHighlight()
             let nextUpdate = Calendar.current.date(byAdding: .hour, value: 4, to: entry.date)!

@@ -10,6 +10,7 @@
 		D347A15E2CD0869100977486 /* OnFirstAppearModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D347A15D2CD0869100977486 /* OnFirstAppearModifier.swift */; };
 		AB10000400000000000F0004 /* GalleryFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB10000300000000000F0003 /* GalleryFrame.swift */; };
 		AB10000200000000000F0002 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB10000100000000000F0001 /* ImageLoader.swift */; };
+		AB10001300000000000F0013 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB10001200000000000F0012 /* OnboardingView.swift */; };
 		AB10001100000000000F0011 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB10000100000000000F0001 /* ImageLoader.swift */; };
 		AB10001000000000000F0010 /* ArtworkSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB10000900000000000F0009 /* ArtworkSearchView.swift */; };
 		AB10000800000000000F0008 /* ArtworkCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB10000700000000000F0007 /* ArtworkCard.swift */; };
@@ -89,6 +90,7 @@
 		D347A15D2CD0869100977486 /* OnFirstAppearModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnFirstAppearModifier.swift; sourceTree = "<group>"; };
 		AB10000300000000000F0003 /* GalleryFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryFrame.swift; sourceTree = "<group>"; };
 		AB10000100000000000F0001 /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
+		AB10001200000000000F0012 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		AB10000900000000000F0009 /* ArtworkSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtworkSearchView.swift; sourceTree = "<group>"; };
 		AB10000700000000000F0007 /* ArtworkCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtworkCard.swift; sourceTree = "<group>"; };
 		AB10000500000000000F0005 /* ArtworkPageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtworkPageLoader.swift; sourceTree = "<group>"; };
@@ -173,6 +175,7 @@
 				D3DA10212BBB933E003ADB02 /* Types */,
 				D3DA100F2BBB9307003ADB02 /* The_Metropolitan_Museum_of_Art_on_a_WatchApp.swift */,
 				D3DA10112BBB9307003ADB02 /* ContentView.swift */,
+				AB10001200000000000F0012 /* OnboardingView.swift */,
 				AB10000900000000000F0009 /* ArtworkSearchView.swift */,
 				AB10000700000000000F0007 /* ArtworkCard.swift */,
 				D347A1672CD0886E00977486 /* NetworkError.swift */,
@@ -361,6 +364,7 @@
 				D347A15E2CD0869100977486 /* OnFirstAppearModifier.swift in Sources */,
 				AB10000400000000000F0004 /* GalleryFrame.swift in Sources */,
 				AB10000200000000000F0002 /* ImageLoader.swift in Sources */,
+				AB10001300000000000F0013 /* OnboardingView.swift in Sources */,
 				AB10001000000000000F0010 /* ArtworkSearchView.swift in Sources */,
 				AB10000800000000000F0008 /* ArtworkCard.swift in Sources */,
 				AB10000600000000000F0006 /* ArtworkPageLoader.swift in Sources */,

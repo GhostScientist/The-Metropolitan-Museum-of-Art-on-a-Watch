@@ -11,6 +11,7 @@ struct ContentView: View {
     @State private var selectedDepartmentID: Int?
     @State private var backdrop: UIImage?
     @State private var path = NavigationPath()
+    @AppStorage("hasCompletedOnboarding") private var hasCompletedOnboarding = false
 
     private let metMuseumClient = MetMuseumClient()
 
@@ -24,6 +25,31 @@ struct ContentView: View {
     }
 
     var body: some View {
+        ZStack {
+            if hasCompletedOnboarding {
+                galleries
+                    .transition(.opacity)
+            } else {
+                OnboardingView {
+                    withAnimation(.easeInOut(duration: 0.7)) {
+                        hasCompletedOnboarding = true
+                    }
+                }
+                .transition(.opacity)
+            }
+        }
+        .onAppear {
+            if departments.isEmpty { fetchDepartments() }
+        }
+        .onChange(of: selectedDepartmentID, initial: true) { _, _ in
+            updateBackdrop()
+        }
+        .onOpenURL { url in
+            handleDeepLink(url)
+        }
+    }
+
+    private var galleries: some View {
         NavigationStack(path: $path) {
             Group {
                 if isLoading {
@@ -59,15 +85,6 @@ struct ContentView: View {
             .containerBackground(for: .navigation) {
                 AmbientBackdrop(image: backdrop)
             }
-        }
-        .onAppear {
-            if departments.isEmpty { fetchDepartments() }
-        }
-        .onChange(of: selectedDepartmentID, initial: true) { _, _ in
-            updateBackdrop()
-        }
-        .onOpenURL { url in
-            handleDeepLink(url)
         }
     }
 
@@ -168,6 +185,7 @@ struct ContentView: View {
 
         Task {
             guard let object = try? await metMuseumClient.fetchObjectDetails(objectID: objectID) else { return }
+            hasCompletedOnboarding = true
             var newPath = NavigationPath()
             if let department = departments.first(where: { $0.displayName == object.department }) {
                 newPath.append(department)

@@ -19,17 +19,6 @@ actor MetMuseumClient {
         return try JSONDecoder().decode(DepartmentResponse.self, from: data)
     }
 
-    func searchDepartmentForObjectsBySearchTerm(searchTerm: String, departmentId: Int) async throws -> SearchResult {
-        var components = URLComponents(string: "\(baseURL)/search")!
-        components.queryItems = [
-            URLQueryItem(name: "departmentId", value: String(departmentId)),
-            URLQueryItem(name: "q", value: searchTerm)
-        ]
-        let (data, response) = try await URLSession.shared.data(from: components.url!)
-        try validateResponse(response)
-        return try JSONDecoder().decode(SearchResult.self, from: data)
-    }
-
     func fetchObjects(departmentId: Int) async throws -> ObjectIDs {
         logger.debug("Fetching objects for department \(departmentId)")
         let url = URL(string: "\(baseURL)/objects?departmentIds=\(departmentId)")!

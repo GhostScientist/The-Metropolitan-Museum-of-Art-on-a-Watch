@@ -5,109 +5,111 @@
 //  Created by Dakota Kim on 4/2/24.
 //
 
+import AuthenticationServices
 import SwiftUI
 
 struct ObjectDetailView: View {
-    @Environment(\.openURL) private var openURL
     let objectDetails: ObjectDetails
+
+    /// watchOS has no browser, but an authentication session will present a
+    /// web page. The session must be retained for as long as it is showing.
+    @State private var webSession: ASWebAuthenticationSession?
 
     var body: some View {
         ScrollView {
-            VStack(alignment: .center) {
-                if !objectDetails.primaryImage.isEmpty {
-                    NavigationLink(destination: ImageInspectView(imageURL: objectDetails.primaryImage)) {
-                        AsyncImage(url: URL(string: objectDetails.primaryImage)) { image in
-                            image
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                        } placeholder: {
-                            ProgressView()
-                        }
-                        .clipShape(RoundedRectangle(cornerRadius: 10))
-                    }
-                    .buttonStyle(.plain)
-                } else {
-                    VStack {
-                        Image(systemName: "photo")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 50, height: 50)
-                            .foregroundStyle(.gray)
+            VStack(alignment: .leading, spacing: 10) {
+                hero
 
-                        Text("No image for this option")
-                            .font(.caption)
-                            .foregroundStyle(.gray)
-                    }.padding()
-                }
-
-                VStack(alignment: .leading) {
+                VStack(alignment: .leading, spacing: 2) {
                     Text(objectDetails.title)
-                        .font(.title3)
-                        .fontWeight(.bold)
-
+                        .font(.system(.headline, design: .serif))
+                    if !objectDetails.artistDisplayName.isEmpty {
+                        Text(objectDetails.artistDisplayName)
+                            .font(.subheadline)
+                    }
                     if !objectDetails.artistDisplayBio.isEmpty {
                         Text(objectDetails.artistDisplayBio)
-                            .font(.subheadline)
+                            .font(.caption2)
                             .foregroundStyle(.secondary)
                     }
+                    if !objectDetails.objectDate.isEmpty {
+                        Text(objectDetails.objectDate)
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                            .padding(.top, 2)
+                    }
+                }
 
-                    Divider()
+                Divider()
 
-                    ObjectInfoSection(title: "Date", content: objectDetails.objectDate)
-
-                    Divider()
-
+                VStack(alignment: .leading, spacing: 8) {
                     ObjectInfoSection(title: "Medium", content: objectDetails.medium)
-
-                    Divider()
-
                     ObjectInfoSection(title: "Dimensions", content: objectDetails.dimensions)
-
-                    Divider()
-
                     ObjectInfoSection(title: "Department", content: objectDetails.department)
-
-                    if !objectDetails.culture.isEmpty {
-                        Divider()
-                        ObjectInfoSection(title: "Culture", content: objectDetails.culture)
-                    }
-
-                    if !objectDetails.period.isEmpty {
-                        Divider()
-                        ObjectInfoSection(title: "Period", content: objectDetails.period)
-                    }
-
-                    if !objectDetails.geographyType.isEmpty {
-                        Divider()
-                        ObjectInfoSection(
-                            title: objectDetails.geographyType,
-                            content: "\(objectDetails.city), \(objectDetails.country)"
-                        )
-                    }
-
-                    Divider()
-
+                    ObjectInfoSection(title: "Culture", content: objectDetails.culture)
+                    ObjectInfoSection(title: "Period", content: objectDetails.period)
+                    ObjectInfoSection(title: objectDetails.geographyType, content: geography)
                     ObjectInfoSection(title: "Credit Line", content: objectDetails.creditLine)
+                }
 
-                    if !objectDetails.objectURL.isEmpty {
-                        VStack {
-                            Button {
-                                guard let url = URL(string: objectDetails.objectURL) else { return }
-                                openURL(url)
-                            } label: {
-                                Text("View More Details")
-                            }
-                            .buttonStyle(.borderedProminent)
-                            ShareLink(items: [URL(string: objectDetails.objectURL)!]) {
-                                Label("Share", systemImage: "paperplane.fill")
-                            }
+                if let url = URL(string: objectDetails.objectURL), !objectDetails.objectURL.isEmpty {
+                    VStack(spacing: 6) {
+                        Button {
+                            openInWebSession(url)
+                        } label: {
+                            Label("View on metmuseum.org", systemImage: "safari")
                         }
+                        .buttonStyle(.borderedProminent)
+
+                        ShareLink(item: url) {
+                            Label("Share", systemImage: "paperplane.fill")
+                        }
+                    }
+                    .padding(.top, 4)
+                }
+            }
+            .padding(.horizontal, 4)
+        }
+        .containerBackground(Color.black, for: .navigation)
+        .navigationTitle(objectDetails.objectName)
+    }
+
+    @ViewBuilder
+    private var hero: some View {
+        if objectDetails.primaryImageSmall.isEmpty {
+            GalleryFrame {
+                ArtworkPlaceholder(phase: .failure, caption: "No image available")
+                    .aspectRatio(4 / 3, contentMode: .fit)
+            }
+        } else {
+            NavigationLink(destination: ImageInspectView(imageURL: objectDetails.primaryImageSmall)) {
+                GalleryFrame {
+                    RemoteImage(url: objectDetails.primaryImageSmall, maxPixelSize: 640) { image in
+                        image
+                            .resizable()
+                            .scaledToFit()
+                    } placeholder: { phase in
+                        ArtworkPlaceholder(phase: phase)
+                            .aspectRatio(4 / 3, contentMode: .fit)
                     }
                 }
             }
-            .padding()
+            .buttonStyle(.plain)
         }
-        .containerBackground(.blue.gradient, for: .navigation)
-        .navigationTitle(objectDetails.artistDisplayName)
+    }
+
+    private func openInWebSession(_ url: URL) {
+        let session = ASWebAuthenticationSession(url: url, callbackURLScheme: nil) { _, _ in
+            webSession = nil
+        }
+        session.prefersEphemeralWebBrowserSession = true
+        webSession = session
+        session.start()
+    }
+
+    private var geography: String {
+        [objectDetails.city, objectDetails.country]
+            .filter { !$0.isEmpty }
+            .joined(separator: ", ")
     }
 }

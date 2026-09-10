@@ -8,12 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		D347A15E2CD0869100977486 /* OnFirstAppearModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D347A15D2CD0869100977486 /* OnFirstAppearModifier.swift */; };
+		AB10000400000000000F0004 /* GalleryFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB10000300000000000F0003 /* GalleryFrame.swift */; };
+		AB10000200000000000F0002 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB10000100000000000F0001 /* ImageLoader.swift */; };
+		AB10001100000000000F0011 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB10000100000000000F0001 /* ImageLoader.swift */; };
+		AB10001000000000000F0010 /* ArtworkSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB10000900000000000F0009 /* ArtworkSearchView.swift */; };
+		AB10000800000000000F0008 /* ArtworkCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB10000700000000000F0007 /* ArtworkCard.swift */; };
+		AB10000600000000000F0006 /* ArtworkPageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB10000500000000000F0005 /* ArtworkPageLoader.swift */; };
 		D347A1602CD086F400977486 /* CachedObjectDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = D347A15F2CD086F400977486 /* CachedObjectDetails.swift */; };
 		D347A1622CD0871000977486 /* Object.swift in Sources */ = {isa = PBXBuildFile; fileRef = D347A1612CD0871000977486 /* Object.swift */; };
 		D347A1642CD0875200977486 /* ImageInspectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D347A1632CD0875200977486 /* ImageInspectView.swift */; };
 		D347A1662CD0877500977486 /* ObjectInfoSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D347A1652CD0877500977486 /* ObjectInfoSection.swift */; };
 		D347A1682CD0886E00977486 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D347A1672CD0886E00977486 /* NetworkError.swift */; };
-		D36DBEFD2BBCE8A400D7CD7D /* DepartmentListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36DBEFC2BBCE8A400D7CD7D /* DepartmentListView.swift */; };
+		D36DBEFD2BBCE8A400D7CD7D /* DepartmentGalleryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36DBEFC2BBCE8A400D7CD7D /* DepartmentGalleryView.swift */; };
 		D3DA100B2BBB9307003ADB02 /* The Tiny Met Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = D3DA100A2BBB9307003ADB02 /* The Tiny Met Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		D3DA10102BBB9307003ADB02 /* The_Metropolitan_Museum_of_Art_on_a_WatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DA100F2BBB9307003ADB02 /* The_Metropolitan_Museum_of_Art_on_a_WatchApp.swift */; };
 		D3DA10122BBB9307003ADB02 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DA10112BBB9307003ADB02 /* ContentView.swift */; };
@@ -81,12 +87,17 @@
 
 /* Begin PBXFileReference section */
 		D347A15D2CD0869100977486 /* OnFirstAppearModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnFirstAppearModifier.swift; sourceTree = "<group>"; };
+		AB10000300000000000F0003 /* GalleryFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryFrame.swift; sourceTree = "<group>"; };
+		AB10000100000000000F0001 /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
+		AB10000900000000000F0009 /* ArtworkSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtworkSearchView.swift; sourceTree = "<group>"; };
+		AB10000700000000000F0007 /* ArtworkCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtworkCard.swift; sourceTree = "<group>"; };
+		AB10000500000000000F0005 /* ArtworkPageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtworkPageLoader.swift; sourceTree = "<group>"; };
 		D347A15F2CD086F400977486 /* CachedObjectDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachedObjectDetails.swift; sourceTree = "<group>"; };
 		D347A1612CD0871000977486 /* Object.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Object.swift; sourceTree = "<group>"; };
 		D347A1632CD0875200977486 /* ImageInspectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageInspectView.swift; sourceTree = "<group>"; };
 		D347A1652CD0877500977486 /* ObjectInfoSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectInfoSection.swift; sourceTree = "<group>"; };
 		D347A1672CD0886E00977486 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
-		D36DBEFC2BBCE8A400D7CD7D /* DepartmentListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepartmentListView.swift; sourceTree = "<group>"; };
+		D36DBEFC2BBCE8A400D7CD7D /* DepartmentGalleryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepartmentGalleryView.swift; sourceTree = "<group>"; };
 		D3DA10042BBB9307003ADB02 /* The Tiny Met.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "The Tiny Met.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3DA100A2BBB9307003ADB02 /* The Tiny Met Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "The Tiny Met Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3DA100F2BBB9307003ADB02 /* The_Metropolitan_Museum_of_Art_on_a_WatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = The_Metropolitan_Museum_of_Art_on_a_WatchApp.swift; sourceTree = "<group>"; };
@@ -128,6 +139,9 @@
 			children = (
 				D347A15F2CD086F400977486 /* CachedObjectDetails.swift */,
 				D347A15D2CD0869100977486 /* OnFirstAppearModifier.swift */,
+				AB10000300000000000F0003 /* GalleryFrame.swift */,
+				AB10000100000000000F0001 /* ImageLoader.swift */,
+				AB10000500000000000F0005 /* ArtworkPageLoader.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -159,10 +173,12 @@
 				D3DA10212BBB933E003ADB02 /* Types */,
 				D3DA100F2BBB9307003ADB02 /* The_Metropolitan_Museum_of_Art_on_a_WatchApp.swift */,
 				D3DA10112BBB9307003ADB02 /* ContentView.swift */,
+				AB10000900000000000F0009 /* ArtworkSearchView.swift */,
+				AB10000700000000000F0007 /* ArtworkCard.swift */,
 				D347A1672CD0886E00977486 /* NetworkError.swift */,
 				D3DA10132BBB9308003ADB02 /* Assets.xcassets */,
 				D3DA10152BBB9308003ADB02 /* Preview Content */,
-				D36DBEFC2BBCE8A400D7CD7D /* DepartmentListView.swift */,
+				D36DBEFC2BBCE8A400D7CD7D /* DepartmentGalleryView.swift */,
 				D3EDA7122BBCF62B00EA2B86 /* ObjectDetailView.swift */,
 				D347A1652CD0877500977486 /* ObjectInfoSection.swift */,
 				D347A1632CD0875200977486 /* ImageInspectView.swift */,
@@ -343,7 +359,12 @@
 				D3DA10282BBB9355003ADB02 /* Search.swift in Sources */,
 				D3DA10102BBB9307003ADB02 /* The_Metropolitan_Museum_of_Art_on_a_WatchApp.swift in Sources */,
 				D347A15E2CD0869100977486 /* OnFirstAppearModifier.swift in Sources */,
-				D36DBEFD2BBCE8A400D7CD7D /* DepartmentListView.swift in Sources */,
+				AB10000400000000000F0004 /* GalleryFrame.swift in Sources */,
+				AB10000200000000000F0002 /* ImageLoader.swift in Sources */,
+				AB10001000000000000F0010 /* ArtworkSearchView.swift in Sources */,
+				AB10000800000000000F0008 /* ArtworkCard.swift in Sources */,
+				AB10000600000000000F0006 /* ArtworkPageLoader.swift in Sources */,
+				D36DBEFD2BBCE8A400D7CD7D /* DepartmentGalleryView.swift in Sources */,
 				D347A1622CD0871000977486 /* Object.swift in Sources */,
 				D3DA102A2BBB935B003ADB02 /* Objects.swift in Sources */,
 				D347A1682CD0886E00977486 /* NetworkError.swift in Sources */,
@@ -367,6 +388,7 @@
 				AA10000800000000000B0008 /* Search.swift in Sources */,
 				AA10000900000000000B0009 /* Object.swift in Sources */,
 				AA10001000000000000B0010 /* NetworkError.swift in Sources */,
+				AB10001100000000000F0011 /* ImageLoader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -511,6 +533,7 @@
 				DEVELOPMENT_TEAM = ZU78LZES28;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "The Metropolitan Museum of Art on a Watch Watch App/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "The Tiny Met";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKWatchOnly = YES;
@@ -541,6 +564,7 @@
 				DEVELOPMENT_TEAM = ZU78LZES28;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "The Metropolitan Museum of Art on a Watch Watch App/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "The Tiny Met";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKWatchOnly = YES;

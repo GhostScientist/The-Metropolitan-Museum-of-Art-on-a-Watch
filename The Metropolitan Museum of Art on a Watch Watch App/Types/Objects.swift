@@ -11,6 +11,17 @@ struct ObjectIDs: Codable, Sendable {
     let total: Int
     let objectIDs: [Int]
 
+    private enum CodingKeys: String, CodingKey {
+        case total, objectIDs
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        total = try container.decode(Int.self, forKey: .total)
+        // The Met API returns `"objectIDs": null` when a department has no objects.
+        objectIDs = try container.decodeIfPresent([Int].self, forKey: .objectIDs) ?? []
+    }
+
     var firstTen: [Int] {
         return Array(objectIDs.prefix(10))
     }

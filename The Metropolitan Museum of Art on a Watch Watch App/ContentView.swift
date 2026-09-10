@@ -1,4 +1,5 @@
 import SwiftUI
+import UIKit
 
 struct ContentView: View {
     @State private var departments: [Department] = []
@@ -29,9 +30,7 @@ struct ContentView: View {
                                     .tag(index)
                             }
                             .containerBackground(for: .tabView) {
-                                Image("\(department.departmentId)")
-                                    .resizable()
-                                    .scaledToFill()
+                                departmentBackground(for: department)
                             }
                         }
                         .buttonStyle(.plain)
@@ -42,6 +41,25 @@ struct ContentView: View {
         }
         .onAppear {
             fetchDepartments()
+        }
+    }
+
+    /// Department artwork is bundled by department ID. Departments without a
+    /// bundled image (currently 21, Modern Art) fall back to a gradient rather
+    /// than rendering an empty background.
+    @ViewBuilder
+    private func departmentBackground(for department: Department) -> some View {
+        let assetName = "\(department.departmentId)"
+        if UIImage(named: assetName) != nil {
+            Image(assetName)
+                .resizable()
+                .scaledToFill()
+        } else {
+            LinearGradient(
+                colors: [.indigo, .black],
+                startPoint: .top,
+                endPoint: .bottom
+            )
         }
     }
 

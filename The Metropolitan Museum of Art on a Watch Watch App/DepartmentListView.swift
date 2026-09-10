@@ -25,8 +25,10 @@ struct DepartmentListView: View {
         Group {
             if isLoading && objects.isEmpty {
                 Text("Loading")
+            } else if let errorMessage, objects.isEmpty {
+                ContentUnavailableView(errorMessage, systemImage: "exclamationmark.triangle")
             } else if isSearching && objects.isEmpty {
-                Text("No results found")
+                ContentUnavailableView.search(text: searchText)
             } else {
                 List(objects) { object in
                     NavigationLink(destination: ObjectDetailView(objectDetails: object)) {
@@ -61,6 +63,7 @@ struct DepartmentListView: View {
         objects = []
         currentIndex = 0
         allObjectIDs = []
+        errorMessage = nil
         isLoading = true
         isSearching = true
 
@@ -71,6 +74,8 @@ struct DepartmentListView: View {
 
     private func searchObjects() async {
         guard !searchText.isEmpty else {
+            isSearching = false
+            isLoading = false
             loadInitialContent()
             return
         }
@@ -94,6 +99,7 @@ struct DepartmentListView: View {
 
     private func loadMoreContent() async {
         guard !isLoading, currentIndex < allObjectIDs.count else { return }
+        errorMessage = nil
         isLoading = true
 
         let endIndex = min(currentIndex + pageSize, allObjectIDs.count)
@@ -144,7 +150,12 @@ struct DepartmentListView: View {
                 }
                 await loadMoreContent()
             } catch {
-                errorMessage = "Failed to load initial content"
+                if error.isInternetConnectionError {
+                    errorMessage = "No network connection - try again when reconnected."
+                } else {
+                    errorMessage = "Failed to load objects"
+                }
+                isLoading = false
             }
         }
     }
